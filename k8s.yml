@@ -15,7 +15,7 @@ spec:
       terminationGracePeriodSeconds: 0
       containers:
       - name: mbooks
-        image: iicm/MBooks
+        image: iicm/mbooks
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
