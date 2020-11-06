@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <title>搜索</title>
+    <link rel="stylesheet" href="../css/search.css">
+    <link rel="stylesheet" href="../css/swiper.min.css">
+</head>
+<body>
+<div class="m-container">
+    <header class="header header-inner">
+        <nav class="nav-wrap">
+            <a href="javascript:;" onclick="back();" class="back-icon">
+                <img class="icon" src="../images/icon/back-icon.png" alt="">
+            </a>
+            <div class="top-search">
+                <div class="search-wrap">
+                    <input type="search" placeholder="她儿砸被大佬盯上了" class="clearinput">
+                    <!--<svg aria-hidden="true" class="icon icon-action icon-clearinput" style="display: none;"><use xlink:href="#icon-guanbi"></use></svg>-->
+                    <img src="../images/icon/close-icon.png" class="icon icon-action icon-clearinput"
+                         style="display: none;" alt="">
+                </div>
+            </div>
+            <div class="menu-side">
+                <a href="javascript:;" class="nav-icon">
+                    <img class="icon" src="../images/icon/search-icon2.png" alt="">
+                </a>
+            </div>
+        </nav>
+    </header>
+    <div class="classfication-sort">
+        <div class="sort-filtrate" id="sort-btn">
+            筛选
+            <img class="icon icon-show" src="../images/icon/sort-icon.png" alt="">
+        </div>
+        <div class="sort-wrap">
+            <a href="javascript:;" class="active">综合</a>
+            <a href="javascript:;" class="">热门</a>
+            <a href="javascript:;" class="">点击</a>
+            <a href="javascript:;" class="">收藏</a>
+            <a href="javascript:;" class="">更新</a>
+        </div>
+    </div>
+    <div class="filtrate-wrap">
+        <div class="filtrate-mian">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide swiper-slide-active">
+                        <h2 class="title">筛选</h2>
+                        <div class="filtrate-detail">
+                            <dl>
+                                <dt>频道</dt>
+                                <dd>
+                                    <span class="active">不限</span>
+                                    <span class="">女生</span>
+                                    <span class="">男生</span>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>类型</dt>
+                                <dd>
+                                    <span class="active">不限</span>
+                                    <span class="">古言</span>
+                                    <span class="">现言</span>
+                                    <span class="">玄幻</span>
+                                    <span class="">仙侠</span>
+                                    <span class="">悬疑</span>
+                                    <span class="">青春</span>
+                                    <span class="">科幻</span>
+                                    <span class="">游戏</span>
+                                    <span class="">轻小说</span>
+                                    <span class="">短篇</span>
+                                    <span class="">玄幻(男)</span>
+                                    <span class="">奇幻(男)</span>
+                                    <span class="">武侠(男)</span>
+                                    <span class="">仙侠(男)</span>
+                                    <span class="">都市(男)</span>
+                                    <span class="">历史(男)</span>
+                                    <span class="">军事(男)</span>
+                                    <span class="">悬疑(男)</span>
+                                    <span class="">科幻(男)</span>
+                                    <span class="">游戏(男)</span>
+                                    <span class="">体育(男)</span>
+                                    <span class="">轻小说(男)</span>
+                                    <span class="">现实(男)</span>
+                                    <span class="">短篇(男)</span>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>状态</dt>
+                                <dd>
+                                    <span class="active">不限</span>
+                                    <span class="">连载</span>
+                                    <span class="">完结</span>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>资费</dt>
+                                <dd>
+                                    <span class="active">不限</span>
+                                    <span class="">免费</span>
+                                    <span class="">VIP</span>
+                                    <span class="">包月</span>
+                                    <span class="">特价</span>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>字数</dt>
+                                <dd>
+                                    <span class="active">不限</span>
+                                    <span class="">30万以下</span>
+                                    <span class="">30-50万</span>
+                                    <span class="">50-100万</span>
+                                    <span class="">100-200万</span>
+                                    <span class="">200万以上</span>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-scrollbar" style="display: none;">
+                    <div class="swiper-scrollbar-drag" style="transform: translate3d(0px, 0px, 0px); height: 0px;">
+
+                    </div>
+                </div>
+                <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+            </div>
+        </div>
+        <div class="filtrate-btns">
+            <input type="button" value="重置" class="btn-reset">
+            <input type="submit" value="完成" class="btn-sure">
+        </div>
+    </div>
+    <div class="margin2"></div>
+    <div class="classfication-list">
+        <div class="common-list common-list-close common-list-inner">
+            <a href="./detail.html" class="details-part">
+                <div class="common-img">
+                    <img src="../images/book/1330550.jpg">
+                    <div class="mark-yellow" style="display: none;">完结</div>
+                </div>
+                <dl class="common-info">
+                    <dt>
+                        纵横诸天的巨蛇
+                    </dt>
+                    <dd class="book-profile">
+                        一条蛇，得到吞噬系统，搅动世界风云，获得原力，加速进化。穿梭...
+                    </dd>
+                    <dd class="book-module">
+                        平头银披风
+                        <span class="pipe">·</span>
+                        科幻
+                        <span class="pipe">·</span>
+                        连载
+                        <span class="pipe">·</span>
+                        20万字
+                    </dd>
+                </dl>
+            </a>
+            <a href="./detail.html" class="details-part">
+                <div class="common-img">
+                    <img src="../images/book/943791.jpg">
+                    <div class="mark-yellow" style="display: none;">完结</div>
+                </div>
+                <dl class="common-info">
+                    <dt>
+                        毒后逆天之至尊大小姐
+                    </dt>
+                    <dd class="book-profile">
+                        凤凰涅盘，浴火重生！当二十三世纪呼风唤雨的毒医大人重生为凤家...
+                    </dd>
+                    <dd class="book-module">
+                        猫猫寶貝
+                        <span class="pipe">·</span>
+                        玄幻
+                        <span class="pipe">·</span>
+                        连载
+                        <span class="pipe">·</span>
+                        448万字
+                    </dd>
+                </dl>
+            </a>
+            <a href="./detail.html" class="details-part">
+                <div class="common-img">
+                    <img src="../images/book/1357082.jpg">
+                    <div class="mark-yellow" style="display: none;">完结</div>
+                </div>
+                <dl class="common-info">
+                    <dt>
+                        盛世豪门之夫人又凶又萌
+                    </dt>
+                    <dd class="book-profile">
+                        （本文古穿今，强强联合，双洁，互宠1v1）她是“凤天’国最强...
+                    </dd>
+                    <dd class="book-module">
+                        雪年年
+                        <span class="pipe">·</span>
+                        现言
+                        <span class="pipe">·</span>
+                        连载
+                        <span class="pipe">·</span>
+                        95万字
+                    </dd>
+                </dl>
+            </a>
+            <a href="./detail.html" class="details-part">
+                <div class="common-img">
+                    <img src="../images/book/1340496.jpg">
+                    <div class="mark-yellow" style="display: none;">完结</div>
+                </div>
+                <dl class="common-info">
+                    <dt>
+                        侯府小哑女
+                    </dt>
+                    <dd class="book-profile">燕云歌自末世而来，重生侯府，她给自己定了个小目标：每天吃好喝...</dd>
+                    <dd class="book-module">
+                        我吃元宝
+                        <span class="pipe">·</span>
+                        古言
+                        <span class="pipe">·</span>
+                        连载
+                        <span class="pipe">·</span>
+                        180万字
+                    </dd>
+                </dl>
+            </a>
+            <a href="./detail.html" class="details-part">
+                <div class="common-img">
+                    <img src="../images/book/1102351.jpg">
+                    <div class="mark-yellow" style="display: none;">完结</div>
+                </div>
+                <dl class="common-info">
+                    <dt>
+                        撒娇福晋最好命
+                    </dt>
+                    <dd class="book-profile">【1v1双洁，甜宠，吃货，轻松无虐】听说四福晋丑若无盐，善妒...</dd>
+                    <dd class="book-module">
+                        李安文
+                        <span class="pipe">·</span>
+                        古言
+                        <span class="pipe">·</span>
+                        连载<span class="pipe">·</span>
+                        199万字
+                    </dd>
+                </dl>
+            </a>
+            <a href="./detail.html" class="details-part">
+                <div class="common-img">
+                    <img src="../images/book/1094388.jpg">
+                    <div class="mark-yellow">完结</div>
+                </div>
+                <dl class="common-info">
+                    <dt>
+                        夫人虐渣要趁早
+                    </dt>
+                    <dd class="book-profile">【重生虐渣，暴爽来袭！复仇千金撩翻神秘高冷未婚夫！】重生前，...</dd>
+                    <dd class="book-module">
+                        恩很宅
+                        <span class="pipe">·</span>
+                        现言
+                        <span class="pipe">·</span>
+                        完结
+                        <span class="pipe">·</span>
+                        242万字
+                    </dd>
+                </dl>
+            </a>
+            <a href="./detail.html" class="details-part">
+                <div class="common-img">
+                    <img src="../images/book/1050733.jpg">
+                    <div class="mark-yellow">完结</div>
+                </div>
+                <dl class="common-info">
+                    <dt>
+                        神医娘亲之腹黑小萌宝
+                    </dt>
+                    <dd class="book-profile">新文《首辅娇娘》已开，欢迎跳坑。她是帝国第一神（兽）医，一朝...</dd>
+                    <dd class="book-module">
+                        偏方方
+                        <span class="pipe">·</span>
+                        古言
+                        <span class="pipe">·</span>
+                        完结
+                        <span class="pipe">·</span>
+                        259万字
+                    </dd>
+                </dl>
+            </a>
+            <a href="./detail.html" class="details-part">
+                <div class="common-img">
+                    <img src="../images/book/1355011.jpg">
+                    <div class="mark-yellow" style="display: none;">完结</div>
+                </div>
+                <dl class="common-info">
+                    <dt>
+                        名门热恋之夫人是大佬
+                    </dt>
+                    <dd class="book-profile">【本文女主燃炸，男主拽，狗粮一堆，虐渣打怪＋双宠爽文。】叶九...</dd>
+                    <dd class="book-module">
+                        薄荷凉夏
+                        <span class="pipe">·</span>
+                        现言
+                        <span class="pipe">·</span>
+                        连载
+                        <span class="pipe">·</span>
+                        106万字
+                    </dd>
+                </dl>
+            </a>
+            <a href="./detail.html" class="details-part">
+                <div class="common-img">
+                    <img src="../images/book/1331984.jpg">
+                    <div class="mark-yellow" style="display: none;">完结</div>
+                </div>
+                <dl class="common-info">
+                    <dt>
+                        清穿之贵妃有喜了
+                    </dt>
+                    <dd class="book-profile">低调的豪门千金杨绵绵，一觉醒来，莫名其妙的来到了雍正年间，还...</dd>
+                    <dd class="book-module">
+                        杨家小棉羊
+                        <span class="pipe">·</span>
+                        古言
+                        <span class="pipe">·</span>
+                        连载
+                        <span class="pipe">·</span>
+                        148万字
+                    </dd>
+                </dl>
+            </a>
+        </div>
+    </div>
+    <div class="over-wrap over-wrap-up" style="display: none;"></div>
+</div>
+<span class="backTop">
+
+</span>
+<script src="../common/flexible.js"></script>
+<script>
+  const sortBtn = document.getElementById('sort-btn');
+  const cover = document.querySelector('.over-wrap');
+  sortBtn.addEventListener('click', function() {
+    document.querySelector('.filtrate-wrap').classList.add('filtrate-wrap-active');
+    cover.style.display = 'block';
+  });
+  cover.addEventListener('click', function() {
+    cover.style.display = 'none';
+    document.querySelector('.filtrate-wrap').classList.remove('filtrate-wrap-active');
+  })
+</script>
+</body>
+</html>

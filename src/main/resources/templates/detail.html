@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <title>书籍详情</title>
+    <link rel="stylesheet" href="../css/detail.css">
+</head>
+<body>
+<div class="m-container">
+    <header class="header header-inner ">
+        <nav class="nav-wrap">
+            <a id="newheaderback" href="javascript:;" onclick="back();" class="back-icon">
+                <img src="../images/icon/back-icon.png" class="icon" alt="">
+            </a>
+            <h1>作品详情</h1>
+            <div class="menu-side">
+                <a id="detailMenuSearch" href="#" class="nav-icon">
+                    <img class="icon" src="../images/icon/search-icon2.png" alt="">
+                </a>
+                <a href="javascript:;" class="nav-icon menu-switch">
+                    <img src="../images/icon/menu-icon.png" class="icon icon-show" alt="">
+                    <img src="../images/icon/close-icon.png" class="icon icon-close" alt="">
+                </a>
+            </div>
+        </nav>
+        <div class="menu-dropdown">
+            <div class="dropdown-wrap">
+                <a href="index.html">
+                    <img class="icon" src="../images/icon/home-icon.png" alt="">
+                    首页
+                </a>
+                <a href="#">
+                    <img class="icon" src="../images/icon/category-icon.png" alt="">
+                    分类
+                </a>
+                <a href="#">
+                    <img class="icon" src="../images/icon/list-icon.png" alt="">
+                    排行
+                </a>
+                <a href="#">
+                    <img class="icon" src="../images/icon/complete-icon.png" alt="">
+                    完本
+                </a>
+                <a href="#">
+                    <img class="icon" src="../images/icon/user-icon.png" alt="">
+                    账户
+                </a>
+            </div>
+            <a href="#" class="btn-center">我的书架</a>
+        </div>
+    </header>
+    <div class="wrapbox">
+        <div class="book-profile-module">
+            <img class="book-profile-blur" src="../images/book/977563.jpg">
+            <dl>
+                <dt>
+                    <img src="../images/book/977563.jpg">
+                </dt>
+                <dd>
+                    <h2 class="book-title">
+                        农家丑妻
+                    </h2>
+                    <p class="book-author">
+                        <a href="#">晗路<span class="pipe">·</span>银牌作家</a>
+                    </p>
+                    <p class="book-tatus">古言<span class="pipe">/</span>连载中</p>
+                    <p class="book-metas">108万字<span class="pipe">|</span>174万阅读</p>
+                    <span class="month">4小时前更新</span>
+                </dd>
+            </dl>
+        </div>
+        <div class="honor-labels">
+            <a href="#" class="label-a">
+                <p class="num">2419</p>
+                <p class="tit">粉丝</p>
+            </a>
+            <a href="#" class="label-a">
+                <p class="num">4.3<span>万</span></p>
+                <p class="tit">打赏</p>
+            </a>
+            <a href="#" class="label-a">
+                <p class="num">72</p>
+                <p class="tit">月票</p>
+            </a>
+            <a href="#" class="label-a">
+                <p class="num">7</p>
+                <p class="tit">评价票</p>
+            </a>
+        </div>
+        <div class="book-info-btns">
+            <a href="javascript:;" id="read-btn" class="btn-info-read">立即阅读</a>
+            <a id="collect" href="javascript:;">加入书架</a>
+            <a href="#" class="btn-info-offline">离线阅读</a>
+        </div>
+        <div class="boxhd">
+            <div class="title">简介</div>
+            <a href="javascript:;" class="icon-more icon-more-tags">
+            </a>
+        </div>
+        <div class="book-summary">
+            <section onclick="info.IntroTogger(this)">
+                <p>夏曦穿越以后，恨不得老天爷来道雷再把她劈死过去。</p>
+                <p>丑就算了，竟然还成了孩子娘。</p>
+                <p>更让她崩溃的是，竟然嫁了个白眼狼。</p>
+                <p>夏曦怒了，</p>
+                <p>虐极品，踹渣渣，休了白眼狼。</p>
+                <p>小日子过得风生水起，却不小心招惹了一个大人物，自此一宠再宠，变成了最尊贵的人。</p>
+                <p>小剧场：一月黑风高夜，两千兵士手持火把，肩抬聘礼来到一农户前。</p>
+                <p>某人下马，上前敲门。</p>
+                <p>无人应。</p>
+                <p>“夏娘子，我来求亲！”</p>
+                <p>无人应。</p>
+                <p>“我带来一千抬聘礼。”</p>
+                <p>无人应。</p>
+                <p>某人鼓起勇气，提高声音，“娘子，孩子是我的！”</p>
+                <p>屋内默。</p>
+                <p>然后一道清亮的声音传出来，“进来！”</p>
+                <p>某人大喜，推门而进，</p>
+                <p>一把闪着寒光的砍刀迎面而来，</p>
+                <p>“你去死！”</p>
+                <span class="toggle-btn">
+                    <img class="icon" src="../images/icon/down-icon.png" alt="">
+                </span>
+            </section>
+        </div>
+        <div class="boxhd">
+            <div class="title">目录</div>
+            <a href="javascript:;" style="padding-right:0;" class="icon-more icon-more-chapter">4小时前 · 连载至 · 第443章
+                完了，小命不保！（2更）</a>
+            <img class="icon" src="../images/icon/right-icon.png" alt="">
+        </div>
+        <div class="module">
+            <div class="module-header">
+                <div class="module-header-l">
+                    <h3 class="module-title">本书作者</h3>
+                </div>
+            </div>
+            <div class="module-content">
+                <ol class="book-ol book-ol-author">
+                    <li class="book-li">
+                        <a href="#" class="book-layout">
+                            <div class="book-author-vv" role="option">
+                                <img class="book-author-avatar" src="../images/avatar/avatar-2.jpg" alt="米饭饭呀的头像.">
+                                <div>
+                                    <aria>作者等级：</aria>
+                                    <em class="tag-honor orange"><i>Lv.9</i></em>
+                                </div>
+                            </div>
+                            <div class="book-cell">
+                                <div class="book-title-x">
+                                    <h4 class="book-title">米饭饭呀</h4>
+                                </div>
+                                <p class="book-desc">暂无作者简介</p>
+                            </div>
+                            <img class="icon" src="../images/icon/right-icon.png" alt="">
+                        </a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="bottom-part bottom-part-inner">
+            <div class="copyrite-bottom">
+                <p class="bottom-nav">
+                    <a href="javascript:;">客户端</a>
+                    <a href="#">电脑版</a>
+                    <a href="#">帮助反馈</a>
+                    <a href="#">广告举报</a>
+                </p>
+                <div class="wechat">
+                    <img class="icon" src="../images/icon/wechat-icon.png" alt="">
+                    微信号：廖某某前端日志
+                </div>
+                <p class="copyrite">备案许可：桂xxx备xxxxxxx号</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../common/flexible.js"></script>
+<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script src="../js/index.js"></script>
+<script>
+  var headerIsCenter = parseInt(0);
+  //下拉餐单
+  $(function() {
+    function headerPreventDefault(e) {
+      e.preventDefault();
+    }
+
+    $('.menu-switch').click(function() {
+      if ($(this).hasClass('menu-switch-active')) {
+        if (headerIsCenter == 1) {
+          $('.header-inner').addClass('center_header');
+        }
+        $(this).removeClass('menu-switch-active');
+        if (headerIsCenter == 1) {
+          $('.menu-dropdown').removeClass('menu-dropdown-center-active');
+        } else {
+          $('.menu-dropdown').removeClass('menu-dropdown-active');
+        }
+        document.removeEventListener('touchmove', headerPreventDefault, { passive: false });
+        $('#headWrap').remove();
+      } else {
+        $(this).addClass('menu-switch-active');
+        if (headerIsCenter == 1) {
+          $('.header-inner').removeClass('center_header');
+        }
+        if (headerIsCenter == 1) {
+          $('.menu-dropdown').addClass('menu-dropdown-center-active');
+        } else {
+          $('.menu-dropdown').addClass('menu-dropdown-active');
+        }
+        document.addEventListener('touchmove', headerPreventDefault, { passive: false });
+        $('body').append('<div id="headWrap" class="over-wrap"></div>');
+
+        $('#headWrap').click(function() {
+          if (headerIsCenter == 1) {
+            $('.header-inner').addClass('center_header');
+          }
+          $('.menu-switch').removeClass('menu-switch-active');
+          if (headerIsCenter == 1) {
+            $('.menu-dropdown').removeClass('menu-dropdown-center-active');
+          } else {
+            $('.menu-dropdown').removeClass('menu-dropdown-active');
+          }
+          document.removeEventListener('touchmove', headerPreventDefault, { passive: false });
+          $('#headWrap').remove();
+        });
+      }
+    });
+    $('#newheaderback').click(function() {
+      if (document.referrer == '') {
+        location.href = '/';
+        return;
+      }
+      history.go(-1);
+    });
+    $('#btn-info-read').click(function() {
+       window.location.href = './read.html';
+    });
+  });
+  window.info = {
+    IntroTogger: function(e) {
+      if ($(e).find('.toggle-btn-overturn').length > 0) {
+        $(e).css({ height: '1.2rem' }).find('.toggle-btn').removeClass('toggle-btn-overturn');
+      } else {
+        $(e).css({ height: 'auto' }).find('.toggle-btn').addClass('toggle-btn-overturn');
+      }
+    }
+  }
+</script>
+</body>
+</html>

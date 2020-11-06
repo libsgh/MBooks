@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <title>用户登录</title>
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+<div class="m-container">
+    <header class="header header-inner ">
+        <nav class="nav-wrap">
+            <a id="newheaderback" href="javascript:;"onclick="back();" class="back-icon">
+                <img class="icon" src="../images/icon/back-icon.png" alt="">
+            </a>
+            <h1>登 录</h1>
+        </nav>
+    </header>
+    <div class="login-wrap">
+    <ul class="login-form login-form-logo">
+        <li>
+            <label for="phone">电话</label>
+            <input id="phone" type="text" class="text clearinput">
+        </li>
+        <li>
+            <label for="password">密码</label>
+            <input id="password" type="password" class="text">
+        </li>
+        <li style="display:-webkit-box;">
+            <label for="txtVcode">验证码</label>
+            <input id="txtVcode" type="text" class="text">
+            <img id="vcode" onclick="login.FreshVcode()" class="images-code" src="../images/code.jpg">
+        </li>
+    </ul>
+    <div id="btnlogin" class="common-btn">登录</div>
+    <div class="account-guide">
+        <a href="javascript:;" class="guide-pwd">忘记密码？</a>
+        <a href="./register.html" class="guide-reg">注册账号 &gt;</a>
+    </div>
+    <div class="quick-login">
+        <div class="tit">
+            快捷登录
+        </div>
+        <div class="quick-login-main"><a href="javascript:;" class="login-qq">QQ登录</a></div>
+    </div>
+    <p class="login-tips">登录/注册即表示您已同意<a href="#">《用户服务和隐私政策协议》</a></p>
+</div>
+</div>
+<script src="../common/flexible.js"></script>
+<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script src="../js/index.js"></script>
+<script>
+    $('input').focus(function() {
+      $(this).parent().addClass('active');
+    });
+    $('input').blur(function() {
+      if(!$(this).val()){
+        $(this).parent().removeClass('active');
+      }
+    });
+    $('#btnlogin').click(function() {
+        window.location.href = './center.html';
+    });
+</script>
+</body>
+</html>

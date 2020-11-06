@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <title>书架</title>
+    <link rel="stylesheet" href="../css/bookshelf.css">
+</head>
+<body>
+<div class="m-container">
+    <header class="header header-inner ">
+        <nav class="nav-wrap">
+            <a id="newheaderback" href="javascript:;" onclick="back();" class="back-icon">
+                <img src="../images/icon/back-icon.png" class="icon" alt="">
+            </a>
+            <div class="btn-group btn-group-small">
+                <h3 class="btn-group-cell" role="navigation" aria-label="已选择">
+                    <a href="#" class="btn-tab active">我的书架</a>
+                </h3>
+                <h3 class="btn-group-cell" role="navigation" aria-label="">
+                    <a href="#" class="btn-tab">最近阅读</a>
+                </h3>
+            </div>
+            <div class="menu-side">
+                <a id="detailMenuSearch" href="#" class="nav-icon">
+                    <img class="icon" src="../images/icon/search-icon2.png" alt="">
+                </a>
+                <a href="javascript:;" class="nav-icon menu-switch">
+                    <img src="../images/icon/menu-icon.png" class="icon icon-show" alt="">
+                    <img src="../images/icon/close-icon.png" class="icon icon-close" alt="">
+                </a>
+            </div>
+        </nav>
+        <div class="menu-dropdown">
+            <div class="dropdown-wrap">
+                <a href="index.html">
+                    <img class="icon" src="../images/icon/home-icon.png" alt="">
+                    首页
+                </a>
+                <a href="#">
+                    <img class="icon" src="../images/icon/category-icon.png" alt="">
+                    分类
+                </a>
+                <a href="#">
+                    <img class="icon" src="../images/icon/list-icon.png" alt="">
+                    排行
+                </a>
+                <a href="#">
+                    <img class="icon" src="../images/icon/complete-icon.png" alt="">
+                    完本
+                </a>
+                <a href="#">
+                    <img class="icon" src="../images/icon/user-icon.png" alt="">
+                    账户
+                </a>
+            </div>
+            <a href="#" class="btn-center">我的书架</a>
+        </div>
+    </header>
+    <div id="editBtnHeader" class="mybook-module-header">
+        <header class="mybook-default-header" style="">
+            <div class="module-header-l">
+                <a href="javascript:" id="filterGroup" class="mybook-sub-title" role="combobox"
+                   title="点击出现浮层，可更换选项，选项列表在浮层底部">
+                    <aria>请选择书架分组：</aria>
+                    <ul class="select-ul" id="bookGroupListSwitchtContainer">
+                        <li class="select-option selected" data-group-id="-100">
+                            默认书架(
+                            <span class="group-cnt">7</span>
+                            )
+                        </li>
+                    </ul>
+                    <i class="select-tri"></i>
+                </a>
+                <a href="javascript:" id="timeOrder" class="select-a" role="combobox" title="点击出现浮层，可更换选项，选项列表在浮层底部">
+                    <aria>当前书架排序是按照：</aria>
+                    <ul class="select-ul">
+                        <li class="select-option selected" data-value="2">阅读时间</li>
+                        <li class="select-option " data-value="0">更新时间</li>
+                    </ul>
+                    <img class="icon icon-order" src="../images/icon/sort-icon.png" alt="">
+                </a>
+            </div>
+            <a href="javascript:" id="bookEditBtn" class="header-opt-a-r" role="button" data-on="close"
+               title="可对书架书籍分组或删除，操作栏在底部，选中任意一本书籍操作栏即出现">编辑</a>
+        </header>
+    </div>
+    <!--列表内容-->
+    <ol id="bookEditOl" class="book-ol book-ol-progress">
+        <!-- 加载更多 -->
+        <span class="list-split-1">
+            <!-- 单本书 -->
+            <li class="book-li">
+                <i class="radio">
+                    <img class="icon icon-ok" src="../images/icon/ok-icon.png" alt="">
+                </i>
+                <div class="book-layout">
+                    <div class="rel">
+                        <a href="./detail.html" class="mybook-to-detail" aria-hidden="true">
+                            <img src="../images/book/90-1.jpg" class="book-cover"
+                                 alt="我欲封天 限时免费">
+                        </a>
+                        <a href="./detail.html" class="book-title-x">
+                            <h4 class="book-title">我欲封天
+                                <span class="tag-small-group">
+                                    <em class="tag-solid orange recomm-toggle" style="display:none">推荐</em>
+                                </span>
+                            </h4>
+                        </a>
+                    </div>
+                    <!-- 继续阅读 -->
+                    <a href="./detail.html" class="mybook-to-goon">
+                        <div class="book-title-x">
+                            <div class="book-title-r">
+                                <span class="gray">继续阅读</span>
+                                <img class="icon icon-arrow-r" src="../images/icon/right-icon.png" alt="">
+                            </div>
+                        </div>
+                        <div class="book-meta">
+                            <p class="ell">
+                                <img class="icon icon-human" src="../images/icon/author-icon.png" alt="">
+                                耳根 | 读至第二卷 初入南域 第180章 山靈！（第一更）章
+                            </p>
+                        </div>
+                    </a>
+                    <div class="rel">
+                        <!-- 最新章节 -->
+                        <a href="#" class="mybook-to-new">
+                            <div class="book-meta">
+                                <time class="book-meta-r">1年前</time>
+                                <p class="ell">
+                                    <i class="dot red"></i>
+                                    更新至 《三寸人间》40万字啦，可以开宰啦~~
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <a href="javascript:" class="mybook-cover-btn" role="checkbox" aria-checked="false"
+                   title="书名：我欲封天"></a>
+            </li>
+            <!-- 单本书 -->
+            <li class="book-li">
+                <i class="radio">
+                    <img class="icon icon-ok" src="../images/icon/ok-icon.png" alt="">
+                </i>
+                <div class="book-layout">
+                    <div class="rel">
+                        <a href="./detail.html" class="mybook-to-detail" aria-hidden="true">
+                            <img src="../images/book/90-2.jpg" class="book-cover"
+                                 alt="求魔 限时免费">
+                        </a>
+                        <a href="./detail.html" class="book-title-x">
+                            <h4 class="book-title">求魔
+                                <span class="tag-small-group">
+                                    <em class="tag-solid orange recomm-toggle" style="display:none">推荐</em>
+                                </span>
+                            </h4>
+                        </a>
+                    </div>
+                    <!-- 继续阅读 -->
+                    <a href="./detail.html" class="mybook-to-goon">
+                        <div class="book-title-x">
+                            <div class="book-title-r">
+                                <span class="gray">继续阅读</span>
+                                <img class="icon icon-arrow-r" src="../images/icon/right-icon.png" alt="">
+                            </div>
+                        </div>
+                        <div class="book-meta">
+                            <p class="ell">
+                                <img class="icon icon-human" src="../images/icon/author-icon.png" alt="">
+                                耳根 | 读至争第一！章
+                            </p>
+                        </div>
+                    </a>
+                    <div class="rel">
+                        <!-- 最新章节 -->
+                        <a href="./detail.html" class="mybook-to-new">
+                            <div class="book-meta">
+                                <time class="book-meta-r">1年前</time>
+                                <p class="ell">
+                                    <i class="dot red"></i>
+                                    更新至 新书《一念永恒》，VIP上架啦
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <a href="javascript:" class="mybook-cover-btn" role="checkbox" aria-checked="false"
+                   title="书名：求魔"></a>
+            </li>
+            <!-- 单本书 -->
+            <li class="book-li">
+                <i class="radio">
+                   <img class="icon icon-ok" src="../images/icon/ok-icon.png" alt="">
+                </i>
+                <div class="book-layout">
+                    <div class="rel">
+                        <a href="./detail.html" class="mybook-to-detail" aria-hidden="true">
+                            <img src="../images/book/90-3.jpg" class="book-cover"
+                                 alt="仙逆 限时免费">
+                        </a>
+                        <a href="./detail.html" class="book-title-x">
+                            <h4 class="book-title">仙逆
+                                <span class="tag-small-group">
+                                    <em class="tag-solid orange recomm-toggle" style="display:none">推荐</em>
+                                </span>
+                            </h4>
+                        </a>
+                    </div>
+                    <!-- 继续阅读 -->
+                    <a href="./detail.html" class="mybook-to-goon">
+                        <div class="book-title-x">
+                            <div class="book-title-r">
+                                <span class="gray">继续阅读</span>
+                                <img class="icon icon-arrow-r" src="../images/icon/right-icon.png" alt="">
+                            </div>
+                        </div>
+                        <div class="book-meta">
+                            <p class="ell">
+                                <img class="icon icon-human" src="../images/icon/author-icon.png" alt="">
+                                耳根 | 读至第十三卷 燈火闌珊 第2088章 驀然回首（結局）章
+                            </p>
+                        </div>
+                    </a>
+                    <div class="rel">
+                        <!-- 最新章节 -->
+                        <a href="./detail.html" class="mybook-to-new">
+                            <div class="book-meta">
+                                <time class="book-meta-r">1年前</time>
+                                <p class="ell">
+                                    更新至 第十三卷 灯火阑珊 第2088章 蓦然回首（结局）
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <a href="javascript:" class="mybook-cover-btn" role="checkbox" aria-checked="false"
+                   title="书名：仙逆"></a>
+            </li>
+            <!-- 单本书 -->
+            <li class="book-li">
+                <i class="radio">
+                   <img class="icon icon-ok" src="../images/icon/ok-icon.png" alt="">
+                </i>
+                <div class="book-layout">
+                    <div class="rel">
+                        <a href="./detail.html" class="mybook-to-detail" aria-hidden="true">
+                            <img src="../images/book/90-4.jpg" class="book-cover"
+                                 alt="一念永恒 限时免费">
+                        </a>
+                        <a href="./detail.html" class="book-title-x">
+                            <h4 class="book-title">一念永恒
+                                <span class="tag-small-group">
+                                    <em class="tag-solid orange recomm-toggle" style="display:none">推荐</em>
+                                </span>
+                            </h4>
+                        </a>
+                    </div>
+                    <!-- 继续阅读 -->
+                    <a href="./detail.html" class="mybook-to-goon">
+                        <div class="book-title-x">
+                            <div class="book-title-r">
+                                <span class="gray">继续阅读</span>
+                                <img class="icon icon-arrow-r" src="../images/icon/right-icon.png" alt="">
+                            </div>
+                        </div>
+                        <div class="book-meta">
+                            <p class="ell">
+                                <img class="icon icon-human" src="../images/icon/author-icon.png" alt="">
+                                耳根 | 读至《三寸人间》上架啦，已40万字，可以开宰啦~~章
+                            </p>
+                        </div>
+                    </a>
+                    <div class="rel">
+                        <!-- 最新章节 -->
+                        <a href="./detail.html" class="mybook-to-new">
+                            <div class="book-meta">
+                                <time class="book-meta-r">1年前</time>
+                                <p class="ell">
+                                    更新至 《三寸人间》上架啦，已40万字，可以开宰啦~~
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <a href="javascript:" class="mybook-cover-btn" role="checkbox" aria-checked="false"
+                   title="书名：一念永恒"></a>
+            </li>
+            <!-- 单本书 -->
+            <li class="book-li">
+                <i class="radio">
+                    <img class="icon icon-ok" src="../images/icon/ok-icon.png" alt="">
+                </i>
+                <div class="book-layout">
+                    <div class="rel">
+                        <a href="./detail.html" class="mybook-to-detail" aria-hidden="true">
+                            <img src="../images/book/90-5.jpg" class="book-cover"
+                                 alt="盗墓笔记 限时免费">
+                        </a>
+                        <a href="./detail.html" class="book-title-x">
+                            <h4 class="book-title">盗墓笔记
+                                <span class="tag-small-group">
+                                    <em class="tag-solid orange recomm-toggle" style="display:none">推荐</em>
+                                </span>
+                            </h4>
+                        </a>
+                    </div>
+                    <!-- 继续阅读 -->
+                    <a href="/book/68223/1823967" class="mybook-to-goon">
+                        <div class="book-title-x">
+                            <div class="book-title-r">
+                                <span class="gray">继续阅读</span>
+                                <img class="icon icon-arrow-r" src="../images/icon/right-icon.png" alt="">
+                            </div>
+                        </div>
+                        <div class="book-meta">
+                            <p class="ell">
+                                <img class="icon icon-human" src="../images/icon/author-icon.png" alt="">
+                                南派三叔 | 读至七星魯王 第二章 50年後章
+                            </p>
+                        </div>
+                    </a>
+                    <div class="rel">
+                        <!-- 最新章节 -->
+                        <a href="./detail.html" class="mybook-to-new">
+                            <div class="book-meta">
+                                <time class="book-meta-r">1年前</time>
+                                <p class="ell">
+                                    <i class="dot red"></i>
+                                    更新至 怒海潜沙 第三十一章 血字
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <a href="javascript:" class="mybook-cover-btn" role="checkbox" aria-checked="false"
+                   title="书名：盗墓笔记"></a>
+            </li>
+            <!-- 单本书 -->
+            <li class="book-li isFineLayout">
+                <i class="radio">
+                    <img class="icon icon-ok" src="../images/icon/ok-icon.png" alt="">
+                </i>
+                <div class="book-layout">
+                    <div class="rel">
+                        <a href="./detail.html" class="mybook-to-detail" aria-hidden="true">
+                            <img src="../images/book/90-6.jpg" class="book-cover"
+                                 alt="傲慢与偏见 限时免费">
+                        </a>
+                        <a href="./detail.html" class="book-title-x">
+                            <h4 class="book-title">傲慢与偏见
+                                <span class="tag-small-group">
+                                    <em class="tag-solid orange recomm-toggle" style="display:none">推荐</em>
+                                </span>
+                            </h4>
+                        </a>
+                    </div>
+                    <!-- 继续阅读 -->
+                    <a href="./detail.html" class="mybook-to-goon">
+                        <div class="book-title-x">
+                            <div class="book-title-r">
+                                <span class="gray">立即阅读</span>
+                                <img class="icon icon-arrow-r" src="../images/icon/right-icon.png" alt="">
+                            </div>
+                        </div>
+                        <div class="book-meta">
+                            <p class="ell">
+                                <img class="icon icon-human" src="../images/icon/author-icon.png" alt="">
+                                (英)简·奥斯丁 | 尚未阅读
+                            </p>
+                        </div>
+                    </a>
+                    <div class="rel">
+                        <!-- 最新章节 -->
+                        <a href="./detail.html" class="mybook-to-new">
+                            <div class="book-meta">
+                                <time class="book-meta-r">1年前</time>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <a href="javascript:" class="mybook-cover-btn" role="checkbox" aria-checked="false"
+                   title="书名：傲慢与偏见"></a>
+            </li>
+            <!-- 单本书 -->
+            <li class="book-li">
+                <i class="radio">
+                    <img class="icon icon-ok" src="../images/icon/ok-icon.png" alt="">
+                </i>
+                <div class="book-layout">
+                    <div class="rel">
+                        <a href="#" class="mybook-to-detail" aria-hidden="true">
+                            <img src="../images/book/90-7.jpg" class="book-cover"
+                                 alt="三寸人间 限时免费">
+                        </a>
+                        <a href="./detail.html" class="book-title-x">
+                            <h4 class="book-title">三寸人间
+                                <span class="tag-small-group">
+                                    <em class="tag-solid orange recomm-toggle" style="display:none">推荐</em>
+                                </span>
+                            </h4>
+                        </a>
+                    </div>
+                    <!-- 继续阅读 -->
+                    <a href="./detail.html" class="mybook-to-goon">
+                        <div class="book-title-x">
+                            <div class="book-title-r">
+                                <span class="gray">继续阅读</span>
+                                <img class="icon icon-arrow-r" src="../images/icon/right-icon.png" alt="">
+                            </div>
+                        </div>
+                        <div class="book-meta">
+                            <p class="ell">
+                                <img class="icon icon-human" src="../images/icon/author-icon.png" alt="">
+                                耳根 | 读至第十章 无敌战武系章
+                            </p>
+                        </div>
+                    </a>
+                    <div class="rel">
+                        <!-- 最新章节 -->
+                        <a href="./detail.html" class="mybook-to-new">
+                            <div class="book-meta">
+                                <time class="book-meta-r">23小时前</time>
+                                <p class="ell">
+                                    <i class="dot red"></i>更新至 第864章 小瓶子！
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <a href="javascript:" class="mybook-cover-btn" role="checkbox" aria-checked="false"
+                   title="书名：三寸人间"></a>
+            </li>
+        </span>
+    </ol>
+    <!--页面脚本-->
+    <aside class="aside" data-is-bind-scroll="true">
+        <i class="aside-overlay" role="button" title="点击关闭浮层"></i>
+        <div class="aside-popup">
+            <div class="select-select scrollable" role="listbox">
+                <a href="javascript:" role="option" title="点击可选择该项，并隐藏浮层" class="select-option selected">阅读时间</a>
+                <a href="javascript:" role="option" title="点击可选择该项，并隐藏浮层" class="select-option">更新时间</a>
+            </div>
+        </div>
+    </aside>
+    <div class="bottom-part bottom-part-inner">
+        <div class="copyrite-bottom">
+            <p class="bottom-nav">
+                <a href="javascript:;">客户端</a>
+                <a href="#">电脑版</a>
+                <a href="#">帮助反馈</a>
+                <a href="#">广告举报</a>
+            </p>
+            <div class="wechat">
+                <img class="icon" src="../images/icon/wechat-icon.png" alt="">
+                微信号：廖某某前端日志
+            </div>
+            <p class="copyrite">备案许可：桂xxx备xxxxxxx号</p>
+        </div>
+    </div>
+</div>
+<script src="../common/flexible.js"></script>
+<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script src="../js/index.js"></script>
+<script>
+  //下拉餐单
+  ;$(function() {
+    function headerPreventDefault(e) {
+      e.preventDefault();
+    }
+    $('.menu-switch').click(function() {
+      if ($(this).hasClass('menu-switch-active')) {
+        $(this).removeClass('menu-switch-active');
+        $('.menu-dropdown').removeClass('menu-dropdown-active');
+        $('.header-inner').addClass('center_header');
+      } else {
+        $(this).addClass('menu-switch-active');
+        $('.menu-dropdown').addClass('menu-dropdown-active');
+        $('.header-inner').removeClass('center_header');
+      }
+    });
+    $('#newheaderback').click(function() {
+      if (document.referrer === '') {
+        location.href = '/';
+        return;
+      }
+      history.go(-1);
+    });
+    $('#bookEditBtn').click(function() {
+      if($(this).attr('data-on') === 'close'){
+        $(this).text('取消');
+        $('#bookEditOl').addClass('enabled');
+        $(this).attr('data-on','open');
+      }else{
+        $(this).text('编辑');
+        $('#bookEditOl').removeClass('enabled');
+        $(this).attr('data-on','close');
+        $('.book-li').removeClass('checked');
+      }
+    });
+    $(document).on('click','.book-li',function(e) {
+      if($('#bookEditBtn').attr('data-on') === 'open'){
+        if($(this).hasClass('checked')){
+          $(this).removeClass('checked');
+        }else{
+          $(this).addClass('checked');
+        }
+        return false;
+      }
+    });
+    $('#timeOrder').click(function() {
+        $('.aside').addClass('active');
+    })
+    $(document).on('click','.aside-overlay',function() {
+      $('.aside').removeClass('active');
+    });
+  });
+</script>
+</body>
+</html>
