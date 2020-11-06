@@ -15,7 +15,7 @@ spec:
       terminationGracePeriodSeconds: 0
       containers:
       - name: mbooks
-        image: libsgh/MBooks:java-maven
+        image: iicm/MBooks:java-maven
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
