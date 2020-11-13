@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-cmn-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no"/>
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+
+    <!-- MDUI CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/css/mdui.min.css"
+      integrity="sha384-cLRrMq39HOZdvE0j6yBojO4+1PrHfB7a9l5qLcmRm/fiWXYY+CndJPmyu5FV/9Tw"
+      crossorigin="anonymous"
+    />
+    <title>电子书管理</title>
+  </head>
+  <body class="mdui-theme-primary-indigo">
+    <div class="mdui-toolbar mdui-color-theme">
+	  <a href="/admin" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">home</i></a>
+	  <span class="mdui-typo-title">电子书管理</span>
+	</div>
+    <!-- MDUI JavaScript -->
+    <div class="mdui-table-fluid">
+	  <table class="mdui-table">
+	    <thead>
+	      <tr>
+	        <th>序号</th>
+	        <th>封面</th>
+	        <th>书名</th>
+	        <th>作者</th>
+	        <th>分类</th>
+	        <th>状态</th>
+	        <th>最近更新</th>
+	        <th>更新时间</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <#list books as book>
+	      	<#assign lastChapterUpdateTime="${book.lastChapterUpdateTime*1000}"/>
+		      <tr>
+		        <td>${book_index+1}</td>
+		        <td><img src="${book.cover}" width="50px" height="50px" /></td>
+		        <td>${book.name}</td>
+		        <td>${book.author}</td>
+		        <td>${book.categoryName}</td>
+		        <td>${book.status}</td>
+		        <td>${book.lastChapterName}</td>
+		        <td>${lastChapterUpdateTime?number?number_to_datetime?string("yyyy-MM-dd HH:mm:ss")!""}</td>
+		      </tr>
+	      </#list>
+	    </tbody>
+	  </table>
+	</div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/js/mdui.min.js"
+      integrity="sha384-gCMZcshYKOGRX9r6wbDrvF+TcCCswSHFucUzUPwka+Gr+uHgjlYvkABr95TCOz3A"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

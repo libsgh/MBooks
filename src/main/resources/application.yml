@@ -9,3 +9,7 @@ spring:
     charset: UTF-8 #编码格式
     settings:
       number_format: '0.##'
+  security:
+    user:
+      name: admin
+      password: 1

@@ -1,39 +1,14 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: mbooks
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: mbooks
-  template:
-    metadata:
-      labels:
-        app: mbooks
-    spec:
-      terminationGracePeriodSeconds: 0
-      containers:
-      - name: mbooks
-        image: iicm/mbooks
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 8080
-
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: mbooks
-  annotations:
-    dev.okteto.com/auto-ingress: "true"
-  labels:
-    app: mbooks
-spec:
-  type: ClusterIP
-  ports:
-    - name: mbooks
-      port: 8080
-  selector:
-    app: mbooks
+name: mbooks
+image: okteto/maven:3
+command: bash
+volumes:
+  - /root/.m2
+sync:
+  - .:/usr/src/app
+forward:
+  - 8080:8080
+  - 5005:5005
+resources:
+  limits:
+    cpu: "1"
+    memory: 2Gi
