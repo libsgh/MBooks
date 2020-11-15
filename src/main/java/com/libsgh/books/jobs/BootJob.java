@@ -35,7 +35,7 @@ public class BootJob  implements  ApplicationListener<ContextRefreshedEvent> {
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent cre) {
 		//初始化缓存数据库
-		InputStream stream = getClass().getClassLoader().getResourceAsStream("data/mbooks_init.sql");
+		InputStream stream = getClass().getClassLoader().getResourceAsStream("sql/mbooks_init.sql");
 		List<String> list = new ArrayList<String>();
 		IoUtil.readLines(stream, Charset.forName("UTF-8"), new LineHandler() {
 			@Override

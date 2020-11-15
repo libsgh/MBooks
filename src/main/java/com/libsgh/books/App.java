@@ -37,8 +37,8 @@ public class App {
         	FileUtil.mkdir(path);
         }
 		ds.setDriverClassName("org.sqlite.JDBC");
-		ds.setUrl("jdbc:sqlite:/home/single/eclipse-workspace/MBooks/src/main/resources/data/mbooks.db");
-		//ds.setUrl("jdbc:sqlite:"+path+"/mbooks.db");
+		//ds.setUrl("jdbc:sqlite:/home/single/eclipse-workspace/MBooks/src/main/resources/data/mbooks.db");
+		ds.setUrl("jdbc:sqlite:"+path+"/mbooks.db");
 		return ds;
 	}
 }

@@ -37,6 +37,20 @@
 			<a href="javascript:void(0)" style="font-size:24px;" onclick="setFontSize(24)">A</a>
 		</div>
 	  </header>
+  	  <div class="mdui-drawer mdui-drawer-close mdui-color-white" id="main-drawer">
+		<ul class="mdui-list">
+		  <li class="mdui-list-item mdui-ripple" onclick="javascript:location.href='/#(u.username)'">
+		    <div class="mdui-list-item-content">
+		      <div class="mdui-list-item-title">第二章 开启神武印记</div>
+		    </div>
+		  </li>
+		  <li>
+		 	 <button class="mdui-btn mdui-btn-dense mdui-color-theme-accent mdui-ripple">上一页</button>
+		 	 <button class="mdui-btn mdui-btn-dense mdui-color-theme-accent mdui-ripple">button</button>
+		 	 <button class="mdui-btn mdui-btn-dense mdui-color-theme-accent mdui-ripple">下一页</button>
+		  </li>
+		</ul>
+	  </div>
 	<div class="mdui-container-fluid mdui-color-grey-100">
 		<div class="mdui-typo-body" style="font-size: 20px; padding-top: 100px;">
 			<div class="title">${c.name}</div>
@@ -48,7 +62,7 @@
  		<i class="mdui-icon material-icons">navigate_before</i>
 	    <label>上一章</label>
 	  </a>
-	  <a href="javascript:;" class="mdui-ripple mdui-bottom-nav-active">
+	  <a href="javascript:;" class="mdui-ripple mdui-bottom-nav-active" mdui-drawer="{target: '#main-drawer', swipe: true}">
  		<i class="mdui-icon material-icons">list</i>
 	    <label>目录</label>
 	  </a>
