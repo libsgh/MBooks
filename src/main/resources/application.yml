@@ -13,3 +13,6 @@ spring:
     user:
       name: admin
       password: 1
+JDBC_DATABASE_URL: jdbc:postgresql://10.2.1.177:5432/okteto
+JDBC_USER: root
+JDBC_PASS: 1234

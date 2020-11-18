@@ -1,0 +1,28 @@
+@charset "UTF-8";
+.title {
+    font-weight: bold;
+    text-align: center;
+    padding: 0 0 5px;
+    font-size: 120%;
+}
+.ptm-card {
+    margin: 0 10px;
+    margin-bottom: 15px;
+    position: relative;
+    background: #fff;
+    border-radius: 6px;
+}
+.ptm-card .ptm-card-header {
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    border-bottom: 1px solid #eee;
+    padding: 0 10px;
+}
+.ptm-clearfix {
+    clear: both;
+    zoom: 1;
+}
+.ptm-card .ptm-card-content {
+    padding: 10px;
+}

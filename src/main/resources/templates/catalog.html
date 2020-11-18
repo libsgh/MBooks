@@ -1,0 +1,50 @@
+<#-- 引入布局指令的命名空间 -->
+<#import "./layout/default.html" as main>
+<#assign ctx=req.getContextPath()>
+<#-- 调用布局指令 -->
+<@main.default>
+<div class="mdui-card">
+<div class="mdui-row">
+  <div class="mdui-col-xs-9">
+  	<button class="mdui-btn mdui-btn-block mdui-btn-raised" mdui-dialog="{target: '#pages'}">${b.pageBegin}-${b.pageEnd}章 <i class="fa fa-angle-down mdui-icon mdui-icon-right"></i></button>
+  </div>
+  <div class="mdui-col-xs-3">
+  	<#if b.order='asc'>
+	    <button class="mdui-btn mdui-btn-block mdui-btn-raised" onclick="orderList(this)">正序 <i class="fa fa-sort-amount-asc mdui-icon"></i></button>
+  	<#else>
+	    <button class="mdui-btn mdui-btn-block mdui-btn-raised" onclick="orderList(this)">倒序 <i class="fa fa-sort-amount-desc mdui-icon"></i></button>
+  	</#if>
+  </div>
+</div>
+<div class="mdui-list mdui-list-dense">
+ <#list b.chapterList as chapter>
+ 	<a href="${ctx}/c/${chapter.id}" class="mdui-list-item mdui-ripple">${chapter.name}</a>
+ 	<li class="mdui-divider"></li>
+ </#list>
+</div>
+ 	<div class="mdui-row">
+  <div class="mdui-col-xs-3">
+    <button class="mdui-btn mdui-btn-block mdui-btn-raised" onclick="location.href = '${ctx}/b/catalog/${b.id}?page=${b.pages-1}'">上一页</button>
+  </div>
+  <div class="mdui-col-xs-6">
+  	<button class="mdui-btn mdui-btn-block mdui-btn-raised" mdui-dialog="{target: '#pages'}">${b.pageBegin}-${b.pageEnd}章 <i class="fa fa-angle-down mdui-icon mdui-icon-right"></i></button>
+  </div>
+  <div class="mdui-col-xs-3">
+    <button class="mdui-btn mdui-btn-block mdui-btn-raised"  onclick="location.href = '${ctx}/b/catalog/${b.id}?page=${b.pages+1}'">下一页</button>
+  </div>
+</div>
+	</div>
+	<div class="mdui-dialog" id="pages">
+ <div class="mdui-dialog-title">请选择章节</div>
+ 	<div class="mdui-list">
+  <#list b.pageList as pl>
+  	<label class="mdui-list-item mdui-ripple">
+    <div class="mdui-list-item-content">${pl.pageBegin}-${pl.pageEnd}章</div>
+    <div class="mdui-checkbox">
+      <input name="page" type="radio" onclick="location.href='${ctx}/b/catalog/${b.id}?page=${pl_index+1}&order=asc'" <#if pl.checked>checked</#if>/>
+    </div>
+  </label>
+  </#list>
+</div>
+</div>
+</@main.default>

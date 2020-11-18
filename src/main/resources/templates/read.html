@@ -7,67 +7,24 @@
     <meta name="renderer" content="webkit"/>
     <meta name="force-rendering" content="webkit"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-
-    <!-- MDUI CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/css/mdui.min.css"
-      integrity="sha384-cLRrMq39HOZdvE0j6yBojO4+1PrHfB7a9l5qLcmRm/fiWXYY+CndJPmyu5FV/9Tw"
-      crossorigin="anonymous"
-    />
-    <style>
-    .title {
-	    font-weight: bold;
-	    text-align: center;
-	    padding: 0 0 20px;
-	    font-size: 120%;
-	}
-    </style>
-    <title>电子书屋</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/css/mdui.min.css"/>
+    <link rel="stylesheet" href="${ctx}/css/main.css"/>
+    <title>${c.name}-${c.author}-${c.bookName}-憨憨小说网</title>
   </head>
-  <body class="mdui-bottom-nav-fixed">
+  <body>
 	  <header class="mdui-appbar mdui-appbar-fixed">
 	    <div class="mdui-toolbar mdui-color-white">
 	    	<a href="${ctx}/">首页</a>
-	    	<a href="${ctx}/">目录</a>
-	    	<a href="${ctx}">夜间模式</a>
+	    	<a href="${ctx}/b/catalog/${c.bookId}">目录</a>
+	    	<a href="javascript:restoreMode()" id="changeModeA">夜间模式</a>
 			<div class="mdui-toolbar-spacer"></div>
 			<a href="javascript:void(0)" style="font-size:16px;" onclick="setFontSize(16)">A</a>|
 			<a href="javascript:void(0)" style="font-size:20px;" onclick="setFontSize(20)">A</a>|
 			<a href="javascript:void(0)" style="font-size:24px;" onclick="setFontSize(24)">A</a>
 		</div>
 	  </header>
-  	  <div class="mdui-drawer mdui-drawer-close mdui-color-white" id="main-drawer">
-		<ul class="mdui-list">
-		  <li class="mdui-list-item mdui-ripple" onclick="javascript:location.href='/#(u.username)'">
-		    <div class="mdui-list-item-content">
-		      <div class="mdui-list-item-title">第二章 开启神武印记</div>
-		    </div>
-		  </li>
-		  <li>
-		  <div class="mdui-row-xs-3 mdui-btn-group">
-			  <div class="mdui-col">
-			    <button class="mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple">上一页</button>
-			  </div>
-			  <div class="mdui-col">
-			  <select class="mdui-select" mdui-select>
-				  <option value="1">State 1</option>
-				  <option value="2">State 2</option>
-				  <option value="3" disabled>State 3</option>
-				  <option value="4">State 4</option>
-				  <option value="5">State 5</option>
-				  <option value="6">State 6</option>
-				</select>
-			  </div>
-			  <div class="mdui-col">
-			    <button class="mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple">下一页</button>
-			  </div>
-			</div>
-		  </li>
-		</ul>
-	  </div>
-	<div class="mdui-container-fluid mdui-color-grey-100">
-		<div class="mdui-typo-body" style="font-size: 20px; padding-top: 100px;">
+	<div class="mdui-container-fluid" style="background-color: #EAEAEF;">
+		<div class="mdui-typo-body" style="font-size: 20px; padding-top: 80px;">
 			<div class="title">${c.name}</div>
 			${c.content}
 		</div>
@@ -77,7 +34,7 @@
  		<i class="mdui-icon material-icons">navigate_before</i>
 	    <label>上一章</label>
 	  </a>
-	  <a href="javascript:;" class="mdui-ripple mdui-bottom-nav-active" mdui-drawer="{target: '#main-drawer', swipe: true}">
+	  <a href="${ctx}/b/catalog/${c.bookId}" class="mdui-ripple mdui-bottom-nav-active">
  		<i class="mdui-icon material-icons">list</i>
 	    <label>目录</label>
 	  </a>
@@ -91,11 +48,6 @@
       integrity="sha384-gCMZcshYKOGRX9r6wbDrvF+TcCCswSHFucUzUPwka+Gr+uHgjlYvkABr95TCOz3A"
       crossorigin="anonymous"
     ></script>
-    <script type="text/javascript">
-    var $ = mdui.$;
-    function setFontSize(size){
-    	$(".mdui-typo-body").attr("style","font-size: "+size+"px; padding-top: 100px");
-    }
-    </script>
+    <script src="${ctx}/js/main.js"></script>
   </body>
 </html>

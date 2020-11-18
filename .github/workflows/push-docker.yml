@@ -6,7 +6,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+    - name: checkout
+      uses: actions/checkout@master
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
@@ -15,3 +16,17 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         tag_names: true
         cache: true
+    - uses: okteto/login@master
+      with:
+        token: ${{ secrets.OKTETO_TOKEN }}
+        
+    - name: "Activate personal namespace"
+      uses: okteto/namespace@master
+      with:
+        name: cindylopez
+        
+    - name: "Create deployment"
+      uses: okteto/apply@master
+      with:
+        manifest: deployment.yaml
+        

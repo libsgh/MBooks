@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.libsgh.books.service.MainService;
 
+import cn.hutool.core.util.StrUtil;
+
 @Controller
 public class MainController {
 	
@@ -27,15 +29,31 @@ public class MainController {
 		return "success";
 	}
 	
-	@RequestMapping("/index")
-	public String index() {
+	@RequestMapping("/")
+	public String index(Model model) {
+		model.addAttribute("list", mainService.queryAllBooks());
 		return "index";
 	}
 	
-	@RequestMapping("/read/{cid}")
+	@RequestMapping("/c/{cid}")
 	public String read(Model model, @PathVariable String cid) {
 		model.addAttribute("c", mainService.getChapterById(cid));
 		return "read";
+	}
+	
+	@RequestMapping("/b/catalog/{bid}")
+	public String catalog(Model model, @PathVariable String bid, String order, Integer page) {
+		if(StrUtil.isBlank(order)) {
+			order = "asc";
+		}
+		model.addAttribute("b", mainService.getChapterListById(bid, page, order));
+		return "catalog";
+	}
+	
+	@RequestMapping("/b/detail/{bid}")
+	public String detail(Model model, @PathVariable String bid) {
+		model.addAttribute("b", mainService.getBookBiId(bid));
+		return "detail";
 	}
 	
 	@RequestMapping("/detail/{bookId}")

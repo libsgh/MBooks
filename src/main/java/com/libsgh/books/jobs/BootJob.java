@@ -35,21 +35,12 @@ public class BootJob  implements  ApplicationListener<ContextRefreshedEvent> {
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent cre) {
 		//初始化缓存数据库
-		InputStream stream = getClass().getClassLoader().getResourceAsStream("sql/mbooks_init.sql");
-		List<String> list = new ArrayList<String>();
-		IoUtil.readLines(stream, Charset.forName("UTF-8"), new LineHandler() {
-			@Override
-			public void handle(String line) {
-				list.add(line);
-			}
-		});
-		int count = 0;
-		for (String sql : list) {
-			try {
-				count += Db.use(ds).execute(sql);
-			} catch (Exception e) {
-			}
+		InputStream in = getClass().getClassLoader().getResourceAsStream("sql/mbooks_init.sql");
+		String sql = IoUtil.read(in, Charset.forName("UTF-8"));
+		try {
+			int count = Db.use(ds).execute(sql);
+			logger.info("上传任务sqlite初始化成功，影响行数：" + count);
+		} catch (Exception e) {
 		}
-		logger.info("上传任务sqlite初始化成功，影响行数：" + count);
 	}
 }

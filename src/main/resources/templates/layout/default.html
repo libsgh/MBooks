@@ -1,0 +1,35 @@
+<#macro default>
+<@compress single_line=true>
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+	<#assign ctx=req.getContextPath()>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no"/>
+	<meta name="renderer" content="webkit"/>
+	<meta name="force-rendering" content="webkit"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/css/mdui.min.css"/>
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="${ctx}/css/main.css"/>
+	<title>${b.name}_${b.author}_${b.name}最新章节_无广告_憨憨小说网</title>
+</head>
+<body class="mdui-theme-primary-white">
+	<div class="mdui-container-fluid">
+		<header class="mdui-appbar">
+	    <div class="mdui-toolbar mdui-color-theme">
+	    	<a href="${ctx}/" class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white">
+	    		<i class="mdui-icon material-icons">home</i>
+	    	</a>
+			<a href="${ctx}/b/detail/${b.id}" class="mdui-typo-title">${b.name}</a>
+			<div class="mdui-toolbar-spacer"></div>
+		</div>
+	  </header>
+	  <#nested>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/js/mdui.min.js"></script>
+    <script src="${ctx}/js/main.js"></script>
+</body>
+</html>
+</@compress>
+</#macro>

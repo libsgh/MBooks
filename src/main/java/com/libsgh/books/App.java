@@ -2,6 +2,7 @@ package com.libsgh.books;
 
 import java.io.File;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.system.ApplicationHome;
@@ -21,6 +22,15 @@ import cn.hutool.log.level.Level;
 @EnableAsync
 public class App {
 
+	@Value("${JDBC_DATABASE_URL}")
+	private String dbUrl;
+	
+	@Value("${JDBC_USER}")
+	private String user;
+	
+	@Value("${JDBC_PASS}")
+	private String pass;
+	
 	public static void main(String[] args) {
 		DbUtil.setShowSqlGlobal(true, true, true, Level.INFO);
 		SpringApplication.run(App.class, args);
@@ -30,15 +40,10 @@ public class App {
 	@Primary
 	public DruidDataSource getDataSource() {
 		DruidDataSource ds = new DruidDataSource();
-		ApplicationHome h = new ApplicationHome(getClass());
-        File jarF = h.getSource();
-        String path = jarF.getParentFile().toString() + "/data";
-        if(!FileUtil.exist(path)) {
-        	FileUtil.mkdir(path);
-        }
-		ds.setDriverClassName("org.sqlite.JDBC");
-		//ds.setUrl("jdbc:sqlite:/home/single/eclipse-workspace/MBooks/src/main/resources/data/mbooks.db");
-		ds.setUrl("jdbc:sqlite:"+path+"/mbooks.db");
+		ds.setDriverClassName("org.postgresql.Driver");
+		ds.setUrl(dbUrl);
+		ds.setUsername(user);
+		ds.setPassword(pass);
 		return ds;
 	}
 }

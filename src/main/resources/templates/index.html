@@ -2,67 +2,78 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-<title>追书网</title>
-<script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
-<script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"/>
+<head>
+	<#assign ctx=req.getContextPath()>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no"/>
+	<meta name="renderer" content="webkit"/>
+	<meta name="force-rendering" content="webkit"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/css/mdui.min.css"/>
+	<link rel="stylesheet" href="${ctx}/css/main.css"/>
+	<title>憨憨小说网_无广告_最新章节</title>
 </head>
-<body>
-<ion-app>
-  <ion-menu side="start" menu-id="first" content-id="main">
-    <ion-content>
-      <ion-list>
-        <ion-item>
-           <ion-icon name="mail" slot="start"></ion-icon>
-           <ion-label>Inbox</ion-label>
-         </ion-item>
-         <ion-item>
-           <ion-icon name="paper-plane" slot="start"></ion-icon>
-           <ion-label>Outbox</ion-label>
-         </ion-item>
-         <ion-item>
-           <ion-icon name="heart" slot="start"></ion-icon>
-           <ion-label>Favorites</ion-label>
-         </ion-item>
-         <ion-item>
-           <ion-icon name="archive" slot="start"></ion-icon>
-           <ion-label>Archived</ion-label>
-         </ion-item>
-      </ion-list>
-    </ion-content>
-  </ion-menu>
-<div class="ion-page" id="main">
-  <ion-header>
-	<ion-toolbar>
-	  <ion-buttons slot="start">
-	    <ion-menu-button auto-hide="false"></ion-menu-button>
-	  </ion-buttons>
-	  <ion-buttons slot="secondary">
-	    <ion-button>
-	      <ion-icon slot="icon-only" name="star"></ion-icon>
-	    </ion-button>
-	  </ion-buttons>
-	  <ion-title>追书网</ion-title>
-	</ion-toolbar>
-  </ion-header>
-  <ion-content class="ion-padding">
-     <ion-list>
-        <ion-item href="">
-         <ion-avatar slot="start">
-            <img src="https://dss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2422435536,2612654361&fm=179&app=35&f=JPEG?w=113&h=150&s=CFC7C50854A12CA4E11845D30100C0B2">
-         </ion-avatar>
-          <ion-label>
-            <h3>元尊</h3>
-            <p>作者：天蚕土豆</p>
-            <p>吾有一口玄黄气,可吞天地日月星。天蚕土豆最新鼎力大作,2017年度必看玄幻小说。</p>
-          </ion-label>
-        </ion-item>
-      </ion-list>
-  </ion-content>
-  </div>
-</ion-app>
-<script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@4.7.4/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@4.7.4/dist/ionicons/ionicons.js"></script>
+<body class="mdui-theme-primary-white">
+	<header class="mdui-appbar">
+	    <div class="mdui-toolbar mdui-color-theme">
+			<a href="${ctx}/" class="mdui-typo-title">憨憨小说网</a>
+			<div class="mdui-toolbar-spacer"></div>
+			<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
+		</div>
+		<div class="mdui-tab" mdui-tab>
+		  <a href="#all-books" class="mdui-ripple">所有书籍</a>
+		  <a href="#example1-tab2" class="mdui-ripple">我的书架</a>
+		  <a href="#example1-tab3" class="mdui-ripple">发现</a>
+		</div>
+		<div id="all-books" class="mdui-p-a-2">
+		<div class="ptm-card" style="margin-top:10px;">
+	        <div class="ptm-card-header ptm-clearfix">
+	            本周排行
+	        </div>
+	        <div class="ptm-card-content">
+	            <ul class="pt-card pt-card-3">
+	                                                <li>
+	                    <div class="pt-cover">
+	                        <a href="/book/1/" title="圣墟"><img src="/public/cover/e9/26/10/e92610c152b26fe85a2cdbe209a084db.jpg" alt="圣墟"></a>
+	                    </div>
+	                    <div class="pt-novel">
+	
+	                        <div class="pt-num ptm-pull-right"><span style="color:orange">3万</span>人关注</div>
+	                        <div class="pt-name" style="margin-bottom:8px;"><a href="/book/1/">圣墟</a></div>
+	                        <div class="pt-author"><a href="/author/chendong">辰东</a> | <a href="/sort/xuanhuan.html">玄幻</a> | 已完结</div>
+	                        <div class="pt-author ptm-text-cut"><a href="/book/1/">第1588章天降皇血</a></div>
+	                        <div class="pt-info">8天前更新</div>
+	                    </div>
+	                </li>
+	               </ul>
+	        </div>
+	    </div>
+        </div>
+		
+		<!-- 
+		
+		
+			<#list list as b>
+				<div class="mdui-row">
+					<div class="mdui-col-xs-3"><img src="${b.cover}" style="width: 60px;height: 80px;margin-left: 15px"/></div>
+					<div class="mdui-col-xs-8" style="max-height: 80px;margin-left: 20px">
+					
+					</div>
+				</div>
+				<img src="${b.cover}" style="width: 60px;height: 80px;margin-left: 15px"/>
+					<div class="mdui-typo-body-1">
+						<h4 style="line-height:7px">${b.name}</h4>
+						<p style="line-height:7px">${b.author} | ${b.categoryName} | ${b.status}</p>
+						<p style="line-height:7px">${b.lastChapterName}</p>
+						<#assign lastChapterUpdateTime="${b.lastChapterUpdateTime*1000}"/>
+						<p  style="line-height:7px">更新：${lastChapterUpdateTime?number?number_to_datetime?string("MM-dd HH:mm:ss")!""}</p>
+					</div>
+			</#list> -->
+		</div>
+	  </header>
+		<div id="example1-tab2" class="mdui-p-a-2">我的书架</div>
+		<div id="example1-tab3" class="mdui-p-a-2">发现</div>
+	<script src="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/js/mdui.min.js"></script>
+    <script src="${ctx}/js/main.js"></script>
 </body>
 </html>
