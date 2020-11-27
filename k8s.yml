@@ -15,7 +15,7 @@ spec:
       terminationGracePeriodSeconds: 0
       containers:
       - name: api
-        image: okteto/hello-world:java-maven
+        image: iicm/mbooks
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
