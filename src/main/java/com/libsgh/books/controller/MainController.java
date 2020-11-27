@@ -24,8 +24,8 @@ public class MainController {
 	}
 	@RequestMapping("/api/add")
 	@ResponseBody
-	public String add() {
-		mainService.fetchOneBook("万古神帝");
+	public String add(String name) {
+		mainService.fetchOneBook(name);
 		return "success";
 	}
 	
