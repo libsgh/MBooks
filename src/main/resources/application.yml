@@ -14,7 +14,7 @@ spring:
       name: admin
       password: 1
 JDBC_DATABASE_URL: jdbc:postgresql://postgresql.libsgh.svc.cluster.local:5432/okteto
-JDBC_USER: root
-JDBC_PASS: 1234
+JDBC_USER: okteto
+JDBC_PASS: okteto
 server:
   port: 8080
