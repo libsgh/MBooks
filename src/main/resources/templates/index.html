@@ -18,36 +18,32 @@
 	    <div class="mdui-toolbar mdui-color-theme">
 			<a href="${ctx}/" class="mdui-typo-title">憨憨小说网</a>
 			<div class="mdui-toolbar-spacer"></div>
-			<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
+			<!-- <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a> -->
 		</div>
 		<div class="mdui-tab" mdui-tab>
 		  <a href="#all-books" class="mdui-ripple">所有书籍</a>
-		  <a href="#example1-tab2" class="mdui-ripple">我的书架</a>
-		  <a href="#example1-tab3" class="mdui-ripple">发现</a>
+		  <!-- <a href="#example1-tab2" class="mdui-ripple">我的书架</a>
+		  <a href="#example1-tab3" class="mdui-ripple">发现</a> -->
 		</div>
 		<div id="all-books" class="mdui-p-a-2">
-		<div class="ptm-card" style="margin-top:10px;">
-	        <div class="ptm-card-header ptm-clearfix">
-	            本周排行
-	        </div>
-	        <div class="ptm-card-content">
-	            <ul class="pt-card pt-card-3">
-	                                                <li>
-	                    <div class="pt-cover">
-	                        <a href="/book/1/" title="圣墟"><img src="/public/cover/e9/26/10/e92610c152b26fe85a2cdbe209a084db.jpg" alt="圣墟"></a>
-	                    </div>
-	                    <div class="pt-novel">
-	
-	                        <div class="pt-num ptm-pull-right"><span style="color:orange">3万</span>人关注</div>
-	                        <div class="pt-name" style="margin-bottom:8px;"><a href="/book/1/">圣墟</a></div>
-	                        <div class="pt-author"><a href="/author/chendong">辰东</a> | <a href="/sort/xuanhuan.html">玄幻</a> | 已完结</div>
-	                        <div class="pt-author ptm-text-cut"><a href="/book/1/">第1588章天降皇血</a></div>
-	                        <div class="pt-info">8天前更新</div>
-	                    </div>
-	                </li>
-	               </ul>
-	        </div>
-	    </div>
+			<ul class="mdui-list">
+			  <#list list as b>
+				  <li class="mdui-list-item" onclick="window.location.href='${ctx}/b/catalog/${b.id}'">
+				    <div class="mdui-list-item-content">
+				      <div class="mdui-list-item-title">${b.name}</div>
+				      <div class="mdui-list-item-text mdui-list-item-one-line">
+				      	${b.author}
+				      </div>
+				      <div class="mdui-list-item-text mdui-list-item-one-line">
+				      	${b.lastChapterName}
+				      </div>
+				      <div class="mdui-list-item-text mdui-list-item-one-line">
+				      	${b.timeF}
+				      </div>
+				    </div>
+				  </li>
+			  </#list>
+  			</ul>
         </div>
 		
 		<!-- 
@@ -70,10 +66,9 @@
 					</div>
 			</#list> -->
 		</div>
-		<p>data:</p>
 	  </header>
-		<div id="example1-tab2" class="mdui-p-a-2">我的书架</div>
-		<div id="example1-tab3" class="mdui-p-a-2">发现</div>
+		<!-- <div id="example1-tab2" class="mdui-p-a-2">我的书架</div>
+		<div id="example1-tab3" class="mdui-p-a-2">发现</div> -->
 	<script src="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/js/mdui.min.js"></script>
     <script src="${ctx}/js/main.js"></script>
 </body>

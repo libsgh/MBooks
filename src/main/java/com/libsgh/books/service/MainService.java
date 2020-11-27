@@ -3,9 +3,11 @@ package com.libsgh.books.service;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -137,10 +139,6 @@ public class MainService {
 		return null;
 	}
 	
-	public static void main(String[] args) {
-		
-	}
-	
 	public Entity getChapterListById(String bid, Integer page, String order) {
 		try {
 			if(page == null || page < 1) {
@@ -211,11 +209,87 @@ public class MainService {
 	public List<Entity> queryAllBooks() {
 		try {
 			List<Entity> list = Db.use(ds).query("select * from book order by \"lastChapterUpdateTime\" desc");
-			return list;
+			return list.stream().map(r->{
+				r.set("timeF", formateTimestamp(r.getLong("lastChapterUpdateTime")*1000));
+				return r;
+			}).collect(Collectors.toList());
 		} catch (SQLException e) {
 			logger.error(e.getMessage(), e);
 		}
 		return null;
 	}
-	
+	public static String formateTimestamp(Long timestamp) {
+		String result = "";
+		int minute = 1000 * 60;
+		int hour = minute * 60;
+		int day = hour * 24;
+		int week = day * 7;
+		int month = day * 30;
+	    Long now = new Date().getTime();
+	    Long diffValue = now - timestamp;
+	    if(diffValue < 0){
+	        return result;
+	    }
+	    long minC = diffValue/minute;
+	    long hourC = diffValue/hour;
+	    long dayC = diffValue/day;
+	    long weekC = diffValue/week;
+	    long monthC = diffValue/month;
+	    if(monthC >= 1 && monthC <= 3){
+	        result = monthC + "月前";
+	    }else if(weekC >= 1 && weekC <= 3){
+	        result = weekC + "周前";
+	    }else if(dayC >= 1 && dayC <= 6){
+	        result = dayC + "天前";
+	    }else if(hourC >= 1 && hourC <= 23){
+	        result = hourC + "小时前";
+	    }else if(minC >= 1 && minC <= 59){
+	        result = minC + "分钟前";
+	    }else if(diffValue >= 0 && diffValue <= minute){
+	        result = "刚刚";
+	    }else {
+	    	if(DateUtil.year(new Date(timestamp)) == DateUtil.year(new Date())) {
+	    		result = DateUtil.format(new Date(timestamp), "MM月dd日");
+	    	}else{
+	    		result = DateUtil.format(new Date(timestamp), "yyyy年MM月dd日");
+	    	}
+	    }
+	    return result;
+	}
+	public String getChapterByIndex(String bId, Integer index, int i) {
+		try {
+			String sql = "";
+			if(i == 1) {
+				sql = "select id from chapter where \"bookId\"=? and index > ? limit 1";
+			}else {
+				sql = "select id from chapter where \"bookId\"=? and index < ? limit 1";
+			}
+			String id = Db.use(ds).queryString(sql, bId, index);
+			if(StrUtil.isBlank(id)) {
+				sql = "select id from chapter where \"bookId\"=? and index = ? limit 1";
+				id = Db.use(ds).queryString(sql, bId, index);
+			}
+			return id;
+		} catch (SQLException e) {
+			logger.error(e.getMessage(), e);
+		}
+		return "";
+		
+	}
+	public void fetchContent() {
+		try {
+			List<Entity> list = Db.use(ds).query("select * from chapter where content = ''");
+			for (Entity entity : list) {
+				List<String> urls = StrUtil.splitTrim(entity.getStr("urls"), ",");
+				Chapter chapter = new Chapter();
+				chapter.setUrls(urls);
+				Chapter c = biQuGeImpl.chapterContent(chapter);
+				if(StrUtil.isNotBlank(c.getContent())) {
+					Db.use(ds).execute("update chapter set content = ? where id=?", c.getContent(), entity.getStr("id"));
+				}
+			}
+		} catch (SQLException e) {
+			logger.error(e.getMessage(), e);
+		}
+	}
 }
