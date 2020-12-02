@@ -27,7 +27,7 @@ jobs:
         #okteto的api密钥
         okteto namespace ${{ secrets.namespace }}
         #Namespace用户名
-        cd /home/runner/work/mbooks
+        cd /home/runner/work/MBooks
         ls
         # push y
         echo y | okteto push
