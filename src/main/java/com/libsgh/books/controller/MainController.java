@@ -29,8 +29,8 @@ public class MainController {
 	
 	@RequestMapping("/api/add")
 	@ResponseBody
-	public String add(String name) {
-		mainService.fetchOneBook(name);
+	public String add(String name, Integer index) {
+		mainService.fetchOneBook(name, index);
 		return "success";
 	}
 	

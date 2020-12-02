@@ -23,16 +23,17 @@ import cn.hutool.json.JSONUtil;
 @Service
 public class BiQuGeImpl implements BaseApi{
 	public static void main(String[] args) {
-		//Book book = new BiQuGeImpl().getBookInfo(new BiQuGeImpl().searchByName("万古神帝").get(2));
+		Book book = new BiQuGeImpl().getBookInfo(new BiQuGeImpl().searchByName("元尊").get(0));
+		System.out.println(book.toString());
 		//List<Chapter> list = new ArrayList<Chapter>();
 		//new BiQuGeImpl().chapterList(list, book.getSource(), 0);
 		//book.setChapters(list);
 		//System.out.println(JSONUtil.toJsonPrettyStr(book));
-		Chapter r = new Chapter();
-		List<String> lc = new ArrayList<String>();
-		lc.add("http://www.xbiquge.la/47/47784/20875607.html");
-		r.setUrls(lc);
-		System.out.println(new BiQuGeImpl().chapterContent(r));
+		//Chapter r = new Chapter();
+		//List<String> lc = new ArrayList<String>();
+		//lc.add("http://www.xbiquge.la/47/47784/20875607.html");
+		//r.setUrls(lc);
+		//System.out.println(new BiQuGeImpl().chapterContent(r));
 	}
 	@Override
 	public List<Book> searchByName(String name) {

@@ -92,33 +92,30 @@ public class MainService {
 		
 	}
 	@Async
-	public Boolean fetchOneBook(String name) {
-		List<Chapter> bdList = new ArrayList<Chapter>();
+	public Boolean fetchOneBook(String name, Integer index) {
 		List<Chapter> bqList = new ArrayList<Chapter>();
-		Book book = baiduApiImpl.searchByName(name).get(0);
-		book = baiduApiImpl.getBookInfo(book);
-		baiduApiImpl.chapterList(bdList, book.getSource(), 1);
-		String thirdSource = biQuGeImpl.searchByName(name).get(2).getSource();
-		book.setSource(thirdSource);
+		Book book = biQuGeImpl.searchByName(name).get(index);
+		Book baiduBook = baiduApiImpl.searchByName(name).get(index);
+		book.setCategoryName(baiduBook.getCategoryName());
+		book.setCpName(baiduBook.getCpName());
+		book.setStatus(baiduBook.getStatus());
+		book.setCover(baiduBook.getCover());
+		book.setShortSummary(baiduBook.getShortSummary());
+		System.out.println(book.toString());
+		biQuGeImpl.chapterList(bqList, book.getSource(), 0);
 		book = this.addBook(book);
-		biQuGeImpl.chapterList(bqList, thirdSource, 0);
-		for (Chapter bdChapter : bdList) {
-			for (Chapter bqChapter : bqList) {
-				if(StrUtil.subAfter(bdChapter.getName(), "章 ", false).equals(StrUtil.subAfter(bqChapter.getName(), "章 ", false))) {
-					try {
-						Thread.sleep(1000L);
-					} catch (InterruptedException e) {
-						logger.error(e.getMessage(), e);
-					}
-					Chapter chapter = biQuGeImpl.chapterContent(bqChapter);
-					chapter.setName(bdChapter.getName());
-					chapter.setBookId(book.getId());
-					chapter.setUpdateTime(bdChapter.getUpdateTime());
-					chapter.setWordSum(bdChapter.getWordSum());
-					this.addChapter(chapter);
-					break;
-				}
+		for (Chapter bqChapter : bqList) {
+			try {
+				Thread.sleep(1000L);
+			} catch (InterruptedException e) {
+				logger.error(e.getMessage(), e);
 			}
+			Chapter chapter = biQuGeImpl.chapterContent(bqChapter);
+			chapter.setName(bqChapter.getName());
+			chapter.setBookId(book.getId());
+			chapter.setUpdateTime(bqChapter.getUpdateTime());
+			chapter.setWordSum(bqChapter.getWordSum());
+			this.addChapter(chapter);
 		}
 		return true;
 	}
@@ -286,6 +283,38 @@ public class MainService {
 				Chapter c = biQuGeImpl.chapterContent(chapter);
 				if(StrUtil.isNotBlank(c.getContent())) {
 					Db.use(ds).execute("update chapter set content = ? where id=?", c.getContent(), entity.getStr("id"));
+				}
+			}
+		} catch (SQLException e) {
+			logger.error(e.getMessage(), e);
+		}
+	}
+	
+	public void updateNewChapter() {
+		try {
+			//查询连载中的书籍
+			List<Entity> books = Db.use(ds).query("select * from book where status = '连载中'");
+			for (Entity book : books) {
+				List<Chapter> cNewList = new ArrayList<Chapter>();
+				biQuGeImpl.chapterList(cNewList, book.getStr("source"), 1);
+				for (int i = cNewList.size() - 1; i >= 0; i--) {
+					Chapter cn = cNewList.get(i);
+					Entity c = Db.use(ds).queryOne("select * from chapter where \"bookId\" = ? and name=?", book.getStr("id"), cn.getName());
+					if(c == null || c.isEmpty()) {
+						try {
+							Thread.sleep(1000L);
+						} catch (InterruptedException e) {
+							logger.error(e.getMessage(), e);
+						}
+						Chapter chapter = biQuGeImpl.chapterContent(cn);
+						chapter.setName(cn.getName());
+						chapter.setBookId(book.getStr("id"));
+						chapter.setUpdateTime(cn.getUpdateTime());
+						chapter.setWordSum(cn.getWordSum());
+						this.addChapter(chapter);
+					}else {
+						break;
+					}
 				}
 			}
 		} catch (SQLException e) {

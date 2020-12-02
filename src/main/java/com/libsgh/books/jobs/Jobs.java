@@ -18,4 +18,10 @@ public class Jobs {
 	public void fetchContent() {
 		mainService.fetchContent();
 	}
+	
+	@Scheduled(cron = "0 0/5 * * * ?")
+	public void updateNewChapter() {
+		mainService.updateNewChapter();
+	}
+	
 }
