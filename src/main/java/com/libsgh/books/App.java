@@ -1,6 +1,9 @@
 package com.libsgh.books;
 
 import java.io.File;
+import java.util.TimeZone;
+
+import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -30,6 +33,11 @@ public class App {
 	
 	@Value("${JDBC_PASS}")
 	private String pass;
+	
+	@PostConstruct
+    public void started() {
+      TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+	}
 	
 	public static void main(String[] args) {
 		DbUtil.setShowSqlGlobal(true, true, true, Level.INFO);

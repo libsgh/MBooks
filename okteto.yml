@@ -2,11 +2,12 @@ name: mbooks
 image: okteto/maven:3
 command: bash
 volumes:
- - /root/.m2
+- /root/.m2
 sync:
- - .:/usr/src/app
+- .:/usr/src/app
 forward:
- - 8080:8080
+- 5005:5005
+- 8080:8080
 resources:
   limits:
     cpu: "1"

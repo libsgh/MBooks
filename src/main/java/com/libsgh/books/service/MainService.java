@@ -196,6 +196,7 @@ public class MainService {
 			}
 			List<Entity> list = Db.use(ds).query("select name,id from chapter where \"bookId\"=? order by index desc limit 5", bid);
 			entity.put("chapters", list);
+			entity.put("lastId", list.get(0).getStr("id"));
 			return entity;
 		} catch (SQLException e) {
 			logger.error(e.getMessage(), e);
@@ -257,9 +258,9 @@ public class MainService {
 		try {
 			String sql = "";
 			if(i == 1) {
-				sql = "select id from chapter where \"bookId\"=? and index > ? limit 1";
+				sql = "select id from chapter where \"bookId\"=? and index > ? order by index asc limit 1";
 			}else {
-				sql = "select id from chapter where \"bookId\"=? and index < ? limit 1";
+				sql = "select id from chapter where \"bookId\"=? and index < ? order by index desc limit 1";
 			}
 			String id = Db.use(ds).queryString(sql, bId, index);
 			if(StrUtil.isBlank(id)) {
@@ -293,9 +294,14 @@ public class MainService {
 	public void updateNewChapter() {
 		try {
 			//查询连载中的书籍
-			List<Entity> books = Db.use(ds).query("select * from book where status = '连载中'");
+			List<Entity> books = Db.use(ds).query("select * from book where status = '连载'");
 			for (Entity book : books) {
 				List<Chapter> cNewList = new ArrayList<Chapter>();
+				Book b = new Book();
+				b.setSource(book.getStr("source"));
+				b = biQuGeImpl.getBookInfo(b);
+				Db.use(ds).execute("update book set \"lastChapterName\"=?,\"lastChapterUpdateTime\"=? where id=?", b.getLastChapterName(), 
+						b.getLastChapterUpdateTime(), book.getStr("id"));
 				biQuGeImpl.chapterList(cNewList, book.getStr("source"), 1);
 				for (int i = cNewList.size() - 1; i >= 0; i--) {
 					Chapter cn = cNewList.get(i);
