@@ -32,3 +32,9 @@ jobs:
       with:
         manifest: k8s.yml
         
+    - name: "Push changes"
+      uses: okteto/push@master
+      with:
+        namespace: libsgh
+        name: mbooks
+        
