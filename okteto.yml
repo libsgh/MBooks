@@ -4,7 +4,8 @@ command: bash
 volumes:
 - /root/.m2
 sync:
-- .:/usr/src/app
+#- .:/usr/src/app
+- .:src
 forward:
 - 5005:5005
 - 8080:8080
