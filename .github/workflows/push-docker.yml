@@ -1,21 +1,21 @@
 name: Publish Docker
 on: 
   watch:
-    types: [started]
+    types: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: checkout
-      uses: actions/checkout@master
-    - name: Publish to Registry
-      uses: elgohr/Publish-Docker-Github-Action@master
-      with:
-        name: iicm/mbooks
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        tag_names: true
-        cache: true
+#    - name: checkout
+#      uses: actions/checkout@master
+#    - name: Publish to Registry
+#      uses: elgohr/Publish-Docker-Github-Action@master
+#      with:
+#        name: iicm/mbooks
+#        username: ${{ secrets.DOCKER_USERNAME }}
+#        password: ${{ secrets.DOCKER_PASSWORD }}
+#        tag_names: true
+#        cache: true
     - uses: okteto/login@master
       with:
         token: ${{ secrets.OKTETO_TOKEN }}
