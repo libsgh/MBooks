@@ -1,7 +1,7 @@
 name: Publish Docker
 on: 
   watch:
-    types: [push]
+    types: [started]
 jobs:
   build:
     runs-on: ubuntu-latest
