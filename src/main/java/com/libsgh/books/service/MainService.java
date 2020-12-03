@@ -95,13 +95,14 @@ public class MainService {
 	public Boolean fetchOneBook(String name, Integer index) {
 		List<Chapter> bqList = new ArrayList<Chapter>();
 		Book book = biQuGeImpl.searchByName(name).get(index);
-		Book baiduBook = baiduApiImpl.searchByName(name).get(index);
-		book.setCategoryName(baiduBook.getCategoryName());
-		book.setCpName(baiduBook.getCpName());
-		book.setStatus(baiduBook.getStatus());
-		book.setCover(baiduBook.getCover());
-		book.setShortSummary(baiduBook.getShortSummary());
-		System.out.println(book.toString());
+		book = biQuGeImpl.getBookInfo(book);
+		/*
+		 * Book baiduBook = baiduApiImpl.searchByName(name).get(index);
+		 * book.setCategoryName(baiduBook.getCategoryName());
+		 * book.setCpName(baiduBook.getCpName()); book.setStatus(baiduBook.getStatus());
+		 * book.setCover(baiduBook.getCover());
+		 * book.setShortSummary(baiduBook.getShortSummary());
+		 */
 		biQuGeImpl.chapterList(bqList, book.getSource(), 0);
 		book = this.addBook(book);
 		for (Chapter bqChapter : bqList) {

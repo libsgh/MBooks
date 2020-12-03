@@ -24,7 +24,7 @@ import cn.hutool.json.JSONUtil;
 public class BiQuGeImpl implements BaseApi{
 	public static void main(String[] args) {
 		Book book = new BiQuGeImpl().getBookInfo(new BiQuGeImpl().searchByName("元尊").get(0));
-		System.out.println(book.toString());
+		System.out.println(JSONUtil.toJsonPrettyStr(book));
 		//List<Chapter> list = new ArrayList<Chapter>();
 		//new BiQuGeImpl().chapterList(list, book.getSource(), 0);
 		//book.setChapters(list);
@@ -69,11 +69,15 @@ public class BiQuGeImpl implements BaseApi{
 		String chapterName = doc.select("#info").select("p").get(3).text();
 		String cover = doc.select("#fmimg").select("img").attr("src");
 		String shortSummary = doc.select("#intro").select("p").get(1).text();
+		String categoryName = doc.select("meta[property=og:novel:category]").attr("content");
 		book.setName(name);
 		book.setLastChapterName(chapterName);
 		book.setLastChapterUpdateTime(t);
 		book.setCover(cover);
 		book.setShortSummary(shortSummary);
+		book.setCategoryName(categoryName);
+		book.setCpName("笔趣阁");
+		book.setStatus("连载");
 		return book;
 	}
 
