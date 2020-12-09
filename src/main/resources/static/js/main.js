@@ -1,6 +1,6 @@
 var $ = mdui.$;
 function setFontSize(size){
-	$(".mdui-typo-body").attr("style","font-size: "+size+"px; padding-top: 100px");
+	$(".mdui-typo-body").attr("style","font-size: "+size+"px; padding-top: 5px");
 }
 function restoreMode() {
 	var modeA = document.getElementById("changeModeA");
@@ -15,7 +15,7 @@ function restoreMode() {
 		backgroundColor = "#000000";
 	}
 	modeA.innerText = text;
-	var texts = document.getElementsByClassName("text");
+	var texts = document.getElementsByClassName("mdui-typo-body");
 	for (var i = 0; i < texts.length;i++) {
 		if (texts[i].nodeName == "DIV") {
 			texts[i].style.color = fontColor;

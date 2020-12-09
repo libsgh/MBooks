@@ -12,3 +12,12 @@
     min-height: 90px;
     margin-right: 10px
 }
+.read-body {
+	color: #2e343f;
+    margin: 0px;
+    padding: 0px;
+    font-family: "Microsoft YaHei",sans-serif;
+    font-size: 16px;
+    background-color:#E6E0D0;
+    line-height: 1.7
+}

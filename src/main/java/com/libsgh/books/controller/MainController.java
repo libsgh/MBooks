@@ -49,16 +49,15 @@ public class MainController {
 	
 	@RequestMapping("/")
 	public String index(HttpServletRequest request, Model model) {
-		LiteDeviceResolver deviceResolver = new LiteDeviceResolver();
-		Device device = deviceResolver.resolveDevice(request);
-		model.addAttribute("isMobile", device.isMobile());
-		model.addAttribute("isNormal", device.isNormal());
 		model.addAttribute("list", mainService.queryAllBooks());
 		return "index";
 	}
 	
 	@RequestMapping("/c/{cid}")
-	public String read(Model model, @PathVariable String cid) {
+	public String read(HttpServletRequest request, Model model, @PathVariable String cid) {
+		LiteDeviceResolver deviceResolver = new LiteDeviceResolver();
+		Device device = deviceResolver.resolveDevice(request);
+		model.addAttribute("isMobile", device.isMobile());
 		Entity entity = mainService.getChapterById(cid);
 		if(entity == null || entity.isEmpty()) {
 			return "redirect:/error/404";

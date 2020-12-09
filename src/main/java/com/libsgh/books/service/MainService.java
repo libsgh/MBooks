@@ -129,7 +129,7 @@ public class MainService {
 		try {
 			return Db.use(ds).queryOne("SELECT a\n" + 
 					"	.*,\n" + 
-					"	b.NAME AS bookName,\n" + 
+					"	b.name AS \"bookName\",\n" + 
 					"	b.author AS author \n" + 
 					"FROM\n" + 
 					"	chapter a\n" + 

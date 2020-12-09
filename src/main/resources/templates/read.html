@@ -11,26 +11,26 @@
     <link rel="stylesheet" href="${ctx}/css/main.css"/>
     <title>${c.name}-${c.author}-${c.bookName}-憨憨小说网</title>
   </head>
-  <body>
-	  <header class="mdui-appbar mdui-appbar-fixed">
-	    <div class="mdui-toolbar mdui-color-white">
-	    	<a href="${ctx}/">首页</a>
+  <body class="read-body">
+	  <header class="mdui-appbar">
+	    <div class="mdui-typo mdui-toolbar">
+	    	<a href="${ctx}/" class="reset">首页</a>
 	    	<a href="${ctx}/b/catalog/${c.bookId}">目录</a>
-	    	<a href="javascript:restoreMode()" id="changeModeA">夜间模式</a>
+	    	<!-- <a href="javascript:restoreMode()" id="changeModeA">夜间模式</a> -->
 			<div class="mdui-toolbar-spacer"></div>
 			<a href="javascript:void(0)" style="font-size:16px;" onclick="setFontSize(16)">A</a>|
 			<a href="javascript:void(0)" style="font-size:20px;" onclick="setFontSize(20)">A</a>|
 			<a href="javascript:void(0)" style="font-size:24px;" onclick="setFontSize(24)">A</a>
 		</div>
 	  </header>
-	<div class="mdui-container-fluid" style="background-color: #EAEAEF;">
-		<div class="mdui-typo-body" style="font-size: 20px; padding-top: 80px;">
+	<div class="mdui-container-fluid">
+		<div class="mdui-typo-body" style="font-size: <#if isMobile>20px<#else>16px</#if>; padding-top: 5px;">
 			<div class="title">${c.name}</div>
 			${c.content}
 		</div>
   	</div>
-  	<div class="mdui-bottom-nav mdui-color-white">
-	  <a href="${ctx}/c/last/${c.index}?bId=${c.bookId}" class="mdui-ripple">
+  	<div class="mdui-bottom-nav">
+	  <a href="${ctx}/c/last/${c.index}?bId=${c.bookId}" class="mdui-ripple mdui-bottom-nav-active">
  		<i class="mdui-icon material-icons">navigate_before</i>
 	    <label>上一章</label>
 	  </a>
@@ -38,7 +38,7 @@
  		<i class="mdui-icon material-icons">list</i>
 	    <label>目录</label>
 	  </a>
-	  <a href="${ctx}/c/next/${c.index}?bId=${c.bookId}" class="mdui-ripple">
+	  <a href="${ctx}/c/next/${c.index}?bId=${c.bookId}" class="mdui-ripple mdui-bottom-nav-active">
  		<i class="mdui-icon material-icons">navigate_next</i>
 	    <label>下一章</label>
 	  </a>
