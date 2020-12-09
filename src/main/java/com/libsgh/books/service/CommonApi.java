@@ -39,7 +39,7 @@ public class CommonApi {
 		book.setCategoryName(category);
 		book.setWordCount(wordCount);
 		book.setReadCount(readCount);
-		book.setDownloadUrl(this.getDownloadUrl(book));
+		book.setDownloadUrl("");
 		return book;
 	}
 	
