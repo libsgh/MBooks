@@ -26,21 +26,22 @@
 		  <a href="#example1-tab3" class="mdui-ripple">发现</a> -->
 		</div>
 		<div id="all-books" class="mdui-p-a-2">
-			<ul class="mdui-list">
+			<ul class="mdui-list mdui-list-dense">
 			  <#list list as b>
 				  <li class="mdui-list-item" onclick="window.location.href='${ctx}/b/detail/${b.id}'">
-				    <div class="mdui-list-item-content">
-				      <div class="mdui-list-item-title">${b.name}</div>
-				      <div class="mdui-list-item-text mdui-list-item-one-line">
-				      	${b.author}
-				      </div>
-				      <div class="mdui-list-item-text mdui-list-item-one-line">
-				      	${b.lastChapterName}
-				      </div>
-				      <div class="mdui-list-item-text mdui-list-item-one-line">
-				      	${b.timeF}
-				      </div>
-				    </div>
+				  		<div class="mdui-list-item-avatar1"><img class="mdui-img-rounded mdui-img-fluid" src="${b.cover}"/></div>
+					  	<div class="mdui-list-item-content">
+					      <div class="mdui-list-item-title">${b.name}</div>
+					      <div class="mdui-list-item-text mdui-list-item-one-line">
+					      	${b.author}
+					      </div>
+					      <div class="mdui-list-item-text mdui-list-item-one-line">
+					      	${b.lastChapterName}
+					      </div>
+					      <div class="mdui-list-item-text mdui-list-item-one-line">
+					      	${b.timeF}
+					      </div>
+					    </div>
 				  </li>
 			  </#list>
   			</ul>

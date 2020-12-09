@@ -18,13 +18,12 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpUtil;
-import cn.hutool.json.JSONUtil;
 
 @Service
-public class BiQuGeImpl implements BaseApi{
+public class BiQuGeImpl extends CommonApi implements BaseApi{
 	public static void main(String[] args) {
 		Book book = new BiQuGeImpl().getBookInfo(new BiQuGeImpl().searchByName("元尊").get(0));
-		System.out.println(JSONUtil.toJsonPrettyStr(book));
+		System.out.println(book);
 		//List<Chapter> list = new ArrayList<Chapter>();
 		//new BiQuGeImpl().chapterList(list, book.getSource(), 0);
 		//book.setChapters(list);
@@ -35,6 +34,7 @@ public class BiQuGeImpl implements BaseApi{
 		//r.setUrls(lc);
 		//System.out.println(new BiQuGeImpl().chapterContent(r));
 	}
+	
 	@Override
 	public List<Book> searchByName(String name) {
 		List<Book> list = new ArrayList<Book>();

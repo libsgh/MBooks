@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS "public"."book" (
   "name" varchar(1024) COLLATE "pg_catalog"."default",
   "author" varchar(100) COLLATE "pg_catalog"."default",
   "categoryName" varchar(200) COLLATE "pg_catalog"."default",
-  "cover" varchar(1024) COLLATE "pg_catalog"."default",
+  "cover" text COLLATE "pg_catalog"."default",
   "shortSummary" text COLLATE "pg_catalog"."default",
   "cpName" varchar(500) COLLATE "pg_catalog"."default",
   "lastChapterName" varchar(500) COLLATE "pg_catalog"."default",
@@ -12,6 +12,10 @@ CREATE TABLE IF NOT EXISTS "public"."book" (
   "createTime" int4,
   "status" varchar(10) COLLATE "pg_catalog"."default",
   "use" int4,
+  "wordCount" int8,
+  "readCount" int8,
+  "state" int4,
+  "downloadUrl" varchar(1024) COLLATE "pg_catalog"."default",
   CONSTRAINT "book_pkey" PRIMARY KEY ("id")
 );
 CREATE TABLE IF NOT EXISTS "public"."chapter" (

@@ -1,8 +1,13 @@
 package com.libsgh.books.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mobile.device.Device;
+import org.springframework.mobile.device.LiteDeviceResolver;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -11,6 +16,7 @@ import com.libsgh.books.jobs.Jobs;
 import com.libsgh.books.service.MainService;
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.db.Entity;
 
 @Controller
 public class MainController {
@@ -42,15 +48,24 @@ public class MainController {
 	}
 	
 	@RequestMapping("/")
-	public String index(Model model) {
+	public String index(HttpServletRequest request, Model model) {
+		LiteDeviceResolver deviceResolver = new LiteDeviceResolver();
+		Device device = deviceResolver.resolveDevice(request);
+		model.addAttribute("isMobile", device.isMobile());
+		model.addAttribute("isNormal", device.isNormal());
 		model.addAttribute("list", mainService.queryAllBooks());
 		return "index";
 	}
 	
 	@RequestMapping("/c/{cid}")
 	public String read(Model model, @PathVariable String cid) {
-		model.addAttribute("c", mainService.getChapterById(cid));
-		return "read";
+		Entity entity = mainService.getChapterById(cid);
+		if(entity == null || entity.isEmpty()) {
+			return "redirect:/error/404";
+		}else{
+			model.addAttribute("c", entity);
+			return "read";
+		}
 	}
 	
 	@RequestMapping("/c/last/{index}")
@@ -72,19 +87,35 @@ public class MainController {
 		if(StrUtil.isBlank(order)) {
 			order = "asc";
 		}
-		model.addAttribute("b", mainService.getChapterListById(bid, page, order));
-		return "catalog";
+		Entity entity = mainService.getChapterListById(bid, page, order);
+		if(entity == null || entity.isEmpty()) {
+			return "redirect:/error/404";
+		}else{
+			model.addAttribute("b", entity);
+			return "catalog";
+		}
 	}
 	
 	@RequestMapping("/b/detail/{bid}")
 	public String detail(Model model, @PathVariable String bid) {
-		model.addAttribute("b", mainService.getBookBiId(bid));
-		return "detail";
+		Entity entity = mainService.getBookBiId(bid);
+		if(entity == null || entity.isEmpty()) {
+			return "redirect:/error/404";
+		}else{
+			model.addAttribute("b",entity);
+			return "detail";
+		}
 	}
 	
-	@RequestMapping("/detail/{bookId}")
-	public String detail(@PathVariable String bookId) {
-		return "detail";
+	@GetMapping("/error/{code}")
+	public String error(@PathVariable int code, Model model) {
+		String pager = "404";
+		switch (code) {
+        case 404:
+            model.addAttribute("code", 404);
+            pager = "404";
+            break;
+		}
+		return pager;
 	}
-	
 }

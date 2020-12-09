@@ -26,6 +26,8 @@ public class Book {
 	
 	public String cpName;//来源cp
 	
+	public String downloadUrl;//下载地址
+	
 	public List<Chapter> chapters;//章节列表
 	
 	public String lastChapterName;//最后一章 章节名称
@@ -38,4 +40,11 @@ public class Book {
 	
 	public int use = 1;//0停用，1启用
 	
+	public int state = 0;//0，完成，1爬取中
+	
+	public Long wordCount = 0L;
+	
+	public Long readCount = 0L;	
+	
+	public int cc;	
 }

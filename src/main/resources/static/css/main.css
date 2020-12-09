@@ -5,3 +5,10 @@
     padding: 0 0 5px;
     font-size: 120%;
 }
+.mdui-list-dense .mdui-list-item-avatar1 {
+    width: 70px;
+    min-width: 70px;
+    height: 90px;
+    min-height: 90px;
+    margin-right: 10px
+}

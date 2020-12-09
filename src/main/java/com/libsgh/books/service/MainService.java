@@ -35,14 +35,11 @@ public class MainService {
 	private DruidDataSource ds;
 	
 	@Autowired
-	private BaiduApiImpl baiduApiImpl;
-	
-	@Autowired
 	private BiQuGeImpl biQuGeImpl;
 	
 	public List<Book> allBooks() {
 		try {
-			return 	Db.use(ds).query("select * from book", Book.class);
+			return 	Db.use(ds).query("select a.*,(select count(1) from chapter b where b.\"bookId\"= a.id)as cc from book a", Book.class);
 		} catch (SQLException e) {
 			logger.error(e.getMessage(), e);
 		}
@@ -63,7 +60,9 @@ public class MainService {
 			record.set("lastChapterUpdateTime", book.getLastChapterUpdateTime());
 			record.set("createTime", DateUtil.currentSeconds());
 			record.set("status", book.getStatus());
+			record.set("downloadUrl", book.getDownloadUrl());
 			record.set("use", 1);
+			record.set("state", 1);
 			int c = Db.use(ds).insertOrUpdate(record, "id");
 			if(c > 0) {
 				book.setId(record.getStr("id"));
@@ -89,20 +88,14 @@ public class MainService {
 		} catch (SQLException e) {
 			logger.error(e.getMessage(), e);
 		}
-		
 	}
+	
 	@Async
 	public Boolean fetchOneBook(String name, Integer index) {
 		List<Chapter> bqList = new ArrayList<Chapter>();
 		Book book = biQuGeImpl.searchByName(name).get(index);
 		book = biQuGeImpl.getBookInfo(book);
-		/*
-		 * Book baiduBook = baiduApiImpl.searchByName(name).get(index);
-		 * book.setCategoryName(baiduBook.getCategoryName());
-		 * book.setCpName(baiduBook.getCpName()); book.setStatus(baiduBook.getStatus());
-		 * book.setCover(baiduBook.getCover());
-		 * book.setShortSummary(baiduBook.getShortSummary());
-		 */
+		book = biQuGeImpl.esouBookInfo(book, index);
 		biQuGeImpl.chapterList(bqList, book.getSource(), 0);
 		book = this.addBook(book);
 		for (Chapter bqChapter : bqList) {
@@ -118,8 +111,20 @@ public class MainService {
 			chapter.setWordSum(bqChapter.getWordSum());
 			this.addChapter(chapter);
 		}
+		//重置book状态
+		this.updateState(0, book.getId());
 		return true;
 	}
+	
+	private void updateState(Integer state, String id) {
+		try {
+			Db.use(ds).execute("update book set state=? where id=?", state, id);
+		} catch (SQLException e) {
+			logger.error(e.getMessage(), e);
+		}
+		
+	}
+	
 	public Entity getChapterById(String cid) {
 		try {
 			return Db.use(ds).queryOne("SELECT a\n" + 
@@ -143,6 +148,9 @@ public class MainService {
 				page = 1;
 			}
 			Entity entity = Db.use(ds).get("book", "id", bid);
+			if(entity == null || entity.isEmpty()) {
+				return entity;
+			}
 			int totalCount = Db.use(ds).queryNumber("select count(*) from chapter where \"bookId\"=?", bid).intValue();
 			int tatalPage = PageUtil.totalPage(totalCount, 50);
 			if(page > tatalPage) {
@@ -179,6 +187,7 @@ public class MainService {
 					pageList.get(i).put("checked", false);
 				}
 			}
+			System.out.println(pageList);
 			entity.put("pageList", pageList);
 			return entity;
 		} catch (SQLException e) {
@@ -190,6 +199,9 @@ public class MainService {
 	public Entity getBookBiId(String bid) {
 		try {
 			Entity entity = Db.use(ds).get("book", "id", bid);
+			if(entity == null || entity.isEmpty()) {
+				return entity;
+			}
 			if(entity.getStr("shortSummary").length() > 50) {
 				entity.put("shortSummarySub", StrUtil.sub(entity.getStr("shortSummary"), 0, 50)+"......");
 			}else {
@@ -217,6 +229,7 @@ public class MainService {
 		}
 		return null;
 	}
+	
 	public static String formateTimestamp(Long timestamp) {
 		String result = "";
 		int minute = 1000 * 60;
@@ -295,7 +308,7 @@ public class MainService {
 	public void updateNewChapter() {
 		try {
 			//查询连载中的书籍
-			List<Entity> books = Db.use(ds).query("select * from book where status = '连载'");
+			List<Entity> books = Db.use(ds).query("select * from book where status = '连载' and state = 0");
 			for (Entity book : books) {
 				List<Chapter> cNewList = new ArrayList<Chapter>();
 				Book b = new Book();
@@ -320,6 +333,12 @@ public class MainService {
 						chapter.setWordSum(cn.getWordSum());
 						this.addChapter(chapter);
 					}else {
+						Chapter chapter = biQuGeImpl.chapterContent(cn);
+						if(chapter.getContent().length() != c.getStr("content").length()) {
+							chapter.setBookId(book.getStr("id"));
+							chapter.setUpdateTime(cn.getUpdateTime());
+							this.updateChapter(chapter);
+						}
 						break;
 					}
 				}
@@ -327,5 +346,13 @@ public class MainService {
 		} catch (SQLException e) {
 			logger.error(e.getMessage(), e);
 		}
+	}
+	private void updateChapter(Chapter chapter) {
+		try {
+			Db.use(ds).execute("update chapter set content=?, updateTime=? where id=?", chapter.getContent(), chapter.getUpdateTime(), chapter.getId());
+		} catch (SQLException e) {
+			logger.error(e.getMessage(), e);
+		}
+		
 	}
 }

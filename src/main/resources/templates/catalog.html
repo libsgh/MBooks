@@ -35,16 +35,16 @@
 </div>
 	</div>
 	<div class="mdui-dialog" id="pages">
- <div class="mdui-dialog-title">请选择章节</div>
- 	<div class="mdui-list">
-  <#list b.pageList as pl>
-  	<label class="mdui-list-item mdui-ripple">
-    <div class="mdui-list-item-content">${pl.pageBegin}-${pl.pageEnd}章</div>
-    <div class="mdui-checkbox">
-      <input name="page" type="radio" onclick="location.href='${ctx}/b/catalog/${b.id}?page=${pl_index+1}&order=asc'" <#if pl.checked>checked</#if>/>
-    </div>
-  </label>
-  </#list>
-</div>
-</div>
+	 	<div class="mdui-dialog-title">请选择章节</div>
+	 	<div class="mdui-list" style="height: 300px; overflow-y: scroll;">
+		  <#list b.pageList as pl>
+		  	<label class="mdui-list-item mdui-ripple">
+		    <div class="mdui-list-item-content">${pl.pageBegin}-${pl.pageEnd}章</div>
+		    <div class="mdui-checkbox">
+		      <input name="page" type="radio" onclick="location.href='${ctx}/b/catalog/${b.id}?page=${pl_index+1}&order=asc'" <#if pl.checked>checked</#if>/>
+		    </div>
+		  </label>
+		  </#list>
+		</div>
+	</div>
 </@main.default>

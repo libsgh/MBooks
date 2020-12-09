@@ -32,6 +32,7 @@
 	        <th>作者</th>
 	        <th>分类</th>
 	        <th>状态</th>
+	        <th>章节数</th>
 	        <th>最近更新</th>
 	        <th>更新时间</th>
 	      </tr>
@@ -46,6 +47,7 @@
 		        <td>${book.author}</td>
 		        <td>${book.categoryName}</td>
 		        <td>${book.status}</td>
+		        <td>${book.cc}</td>
 		        <td>${book.lastChapterName}</td>
 		        <td>${lastChapterUpdateTime?number?number_to_datetime?string("yyyy-MM-dd HH:mm:ss")!""}</td>
 		      </tr>
