@@ -21,28 +21,34 @@
 			<!-- <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a> -->
 		</div>
 		<div class="mdui-tab" mdui-tab>
+		  <!-- <a href="#example1-tab2" class="mdui-ripple">我的书架</a> -->
 		  <a href="#all-books" class="mdui-ripple">所有书籍</a>
-		  <!-- <a href="#example1-tab2" class="mdui-ripple">我的书架</a>
-		  <a href="#example1-tab3" class="mdui-ripple">发现</a> -->
+		  <a href="#example1-tab3" class="mdui-ripple">发现</a>
 		</div>
 		<div id="all-books" class="mdui-p-a-2">
 			<ul class="mdui-list mdui-list-dense">
 			  <#list list as b>
 				  <li class="mdui-list-item" onclick="window.location.href='${ctx}/b/detail/${b.id}'">
-				  		<div class="mdui-list-item-avatar1"><img class="mdui-img-rounded mdui-img-fluid" src="${b.cover}"/></div>
-					  	<div class="mdui-list-item-content">
-					      <div class="mdui-list-item-title">${b.name}</div>
-					      <div class="mdui-list-item-text mdui-list-item-one-line">
-					      	${b.author}
-					      </div>
-					      <div class="mdui-list-item-text mdui-list-item-one-line">
-					      	${b.lastChapterName}
-					      </div>
-					      <div class="mdui-list-item-text mdui-list-item-one-line">
-					      	${b.timeF}
-					      </div>
-					    </div>
+			  		<div class="mdui-list-item-avatar1"><img class="mdui-img-rounded mdui-img-fluid" src="${b.cover}" style="max-height: 90px"/></div>
+				  	<div class="mdui-list-item-content">
+			  		  <div id="read-index-${b.id}" class="mdui-chip mdui-color-red mdui-float-right" style="transform: scale(0.71);display: none">
+						<span class="mdui-chip-title" style="font-size: 14px">0</span>
+					  </div>
+				      <div class="mdui-list-item-title">${b.name}</div>
+				      <div class="mdui-list-item-text mdui-list-item-one-line">
+				      	${b.author}
+				      </div>
+				      <div class="mdui-list-item-text mdui-list-item-one-line">
+				      	${b.lastChapterName}
+				      </div>
+				      <div id="read-cname-${b.id}" style="display: none" class="mdui-list-item-text mdui-list-item-one-line">
+				      </div>
+				      <div id="timeF-${b.id}" class="mdui-list-item-text mdui-list-item-one-line">
+				      	${b.timeF}
+				      </div>
+				    </div>
 				  </li>
+				  <li class="mdui-divider"></li>
 			  </#list>
   			</ul>
         </div>
@@ -66,11 +72,16 @@
 						<p  style="line-height:7px">更新：${lastChapterUpdateTime?number?number_to_datetime?string("MM-dd HH:mm:ss")!""}</p>
 					</div>
 			</#list> -->
-		</div>
 	  </header>
 		<!-- <div id="example1-tab2" class="mdui-p-a-2">我的书架</div>
 		<div id="example1-tab3" class="mdui-p-a-2">发现</div> -->
 	<script src="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/js/mdui.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     <script src="${ctx}/js/main.js"></script>
+    <script type="text/javascript">
+	    <#list list as b>
+	    	readHistory("${b.id}", ${b.last});
+		</#list>
+    </script>
 </body>
 </html>

@@ -78,3 +78,37 @@ function timeago(dateTimeStamp){
     }
     return result;
 }
+//读取看书历史
+function readHistory(bookId, last){
+	var data = Cookies.get(bookId);
+	if(data){
+		var d = JSON.parse(data);
+		if(last-d.index != 0){
+			$("#read-index-"+bookId).find("span").text(last-d.index);
+			$("#read-index-"+bookId).show();
+			$(".readed").show();
+			$("#read-cname-"+bookId).html("您已读至："+d.cname);
+			$("#read-cname-"+bookId).show();
+			$("#timeF-"+bookId).hide();
+		}else{
+			$("#timeF-"+bookId).show();
+		}
+	}
+}
+//记录读书进度
+function recordHistory(bookId, index, cname, cId){
+	var info = {};
+	info["bookId"] = bookId;
+	info["index"] = index;
+	info["cname"] = cname;
+	info["cId"] = cId;
+	Cookies.set(bookId, JSON.stringify(info));
+}
+function startRead(bookId){
+	var data = Cookies.get(bookId);
+	if(data){
+		var d = JSON.parse(data);
+		$("#startReadBtn").text("继续阅读");
+		$("#startReadBtn").attr("onclick", "location.href='/c/next/"+d.index+"?bId="+d.bookId+"'");
+	}
+}

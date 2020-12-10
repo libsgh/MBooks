@@ -43,11 +43,11 @@
 	    <label>下一章</label>
 	  </a>
 	</div>
-    <script
-      src="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/js/mdui.min.js"
-      integrity="sha384-gCMZcshYKOGRX9r6wbDrvF+TcCCswSHFucUzUPwka+Gr+uHgjlYvkABr95TCOz3A"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/js/mdui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     <script src="${ctx}/js/main.js"></script>
+    <script type="text/javascript">
+    recordHistory("${c.bookId}", ${c.index}, "${c.name}", "${c.id}");
+    </script>
   </body>
 </html>

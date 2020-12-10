@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.libsgh.books.bean.Book;
 import com.libsgh.books.bean.Chapter;
+import com.libsgh.books.common.PicBed;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.IdUtil;
@@ -95,7 +96,8 @@ public class MainService {
 		List<Chapter> bqList = new ArrayList<Chapter>();
 		Book book = biQuGeImpl.searchByName(name).get(index);
 		book = biQuGeImpl.getBookInfo(book);
-		book = biQuGeImpl.esouBookInfo(book, index);
+		book.setCover(PicBed.uploadMT(book.getCover(), "./"));
+		//book = biQuGeImpl.esouBookInfo(book, index);
 		biQuGeImpl.chapterList(bqList, book.getSource(), 0);
 		book = this.addBook(book);
 		for (Chapter bqChapter : bqList) {
@@ -219,7 +221,7 @@ public class MainService {
 	
 	public List<Entity> queryAllBooks() {
 		try {
-			List<Entity> list = Db.use(ds).query("select * from book order by \"lastChapterUpdateTime\" desc");
+			List<Entity> list = Db.use(ds).query("select a.*,(select b.index from chapter b where b.\"bookId\"= a.id order by b.index desc LIMIT 1)as last from book a order by a.\"lastChapterUpdateTime\" desc");
 			return list.stream().map(r->{
 				r.set("timeF", formateTimestamp(r.getLong("lastChapterUpdateTime")*1000));
 				return r;
