@@ -2,7 +2,7 @@ name: Publish Docker
 on: 
  # schedule:
   #  - cron: 10 22 * * *
-#  watch:
+  watch:
     types: [started]
 jobs:
   build:
