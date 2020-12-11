@@ -2,11 +2,13 @@ package com.libsgh.books.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -239,7 +241,9 @@ public class MainService {
 		int day = hour * 24;
 		int week = day * 7;
 		int month = day * 30;
-	    Long now = new Date().getTime();
+		TimeZone.setDefault(TimeZone.getTimeZone("Asia/Shanghai"));
+		Calendar cal = Calendar.getInstance() ;
+	    Long now = cal.getTimeInMillis();
 	    Long diffValue = now - timestamp;
 	    if(diffValue < 0){
 	        return result;
@@ -262,13 +266,17 @@ public class MainService {
 	    }else if(diffValue >= 0 && diffValue <= minute){
 	        result = "刚刚";
 	    }else {
-	    	if(DateUtil.year(new Date(timestamp)) == DateUtil.year(new Date())) {
+	    	if(DateUtil.year(new Date(timestamp)) == DateUtil.year(new Date(now))) {
 	    		result = DateUtil.format(new Date(timestamp), "MM月dd日");
 	    	}else{
 	    		result = DateUtil.format(new Date(timestamp), "yyyy年MM月dd日");
 	    	}
 	    }
 	    return result;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(formateTimestamp(DateUtil.parse("2020-12-11 09:22:42").getTime()));
 	}
 	public String getChapterByIndex(String bId, Integer index, int i) {
 		try {

@@ -1,8 +1,10 @@
-
-name: okteto开发
+name: push to okteto
 on:
   schedule:
     - cron: 10 22 * * *
+  push:
+    branches:    
+      - master
 #  watch:
 #    types: started
 jobs:

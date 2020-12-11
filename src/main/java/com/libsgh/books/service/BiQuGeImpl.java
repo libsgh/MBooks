@@ -1,8 +1,10 @@
 package com.libsgh.books.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -41,6 +43,9 @@ public class BiQuGeImpl extends CommonApi implements BaseApi{
 		String body = HttpRequest.post("http://www.xbiquge.la/modules/article/waps.php").form("searchkey", name).execute().body();
 		Document doc = Jsoup.parse(body);
 		Elements elements = doc.select(".grid").select("tbody").select("tr");
+		TimeZone.setDefault(TimeZone.getTimeZone("Asia/Shanghai"));
+		Calendar cal = Calendar.getInstance() ;
+	    Long now = cal.getTimeInMillis();
 		for (int i = 1; i < elements.size(); i++) {
 			Book book = new Book();
 			Element ele = elements.get(i);
@@ -53,7 +58,7 @@ public class BiQuGeImpl extends CommonApi implements BaseApi{
 			book.setSource(source);
 			book.setLastChapterName(lastChapterName);
 			book.setAuthor(author);
-			int t = Integer.parseInt((DateUtil.parse(DateUtil.year(new Date())+"-"+time, DatePattern.NORM_DATE_PATTERN).getTime()/1000)+"");
+			int t = Integer.parseInt((DateUtil.parse(DateUtil.year(new Date(now))+"-"+time, DatePattern.NORM_DATE_PATTERN).getTime()/1000)+"");
 			book.setLastChapterUpdateTime(t);
 			list.add(book);
 		}
