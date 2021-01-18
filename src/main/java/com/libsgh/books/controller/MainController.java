@@ -60,7 +60,7 @@ public class MainController {
 		model.addAttribute("isMobile", device.isMobile());
 		Entity entity = mainService.getChapterById(cid);
 		if(entity == null || entity.isEmpty()) {
-			return "redirect:/error/404";
+			return "redirect:https://novel.noki.top/error/404";
 		}else{
 			model.addAttribute("c", entity);
 			return "read";
@@ -71,14 +71,14 @@ public class MainController {
 	public String last( @PathVariable Integer index, String bId) {
 		String id = mainService.getChapterByIndex(bId, index, -1);
 		//TODO 这里要判断一下是不是有下一章或上一章了，没有跳转新页面
-		return "redirect:/c/"+id;
+		return "redirect:https://novel.noki.top/c/"+id;
 	}
 	
 	@RequestMapping("/c/next/{index}")
 	public String next(@PathVariable Integer index, String bId) {
 		String id = mainService.getChapterByIndex(bId, index, 1);
 		//TODO 这里要判断一下是不是有下一章或上一章了，没有跳转新页面
-		return "redirect:/c/"+id;
+		return "redirect:https://novel.noki.top/c/"+id;
 	}
 	
 	@RequestMapping("/b/catalog/{bid}")
@@ -88,7 +88,7 @@ public class MainController {
 		}
 		Entity entity = mainService.getChapterListById(bid, page, order);
 		if(entity == null || entity.isEmpty()) {
-			return "redirect:/error/404";
+			return "redirect:https://novel.noki.top/error/404";
 		}else{
 			model.addAttribute("b", entity);
 			return "catalog";
@@ -99,7 +99,7 @@ public class MainController {
 	public String detail(Model model, @PathVariable String bid) {
 		Entity entity = mainService.getBookBiId(bid);
 		if(entity == null || entity.isEmpty()) {
-			return "redirect:/error/404";
+			return "redirect:https://novel.noki.top/error/404";
 		}else{
 			model.addAttribute("b",entity);
 			return "detail";
