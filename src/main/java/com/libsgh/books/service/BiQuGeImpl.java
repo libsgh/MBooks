@@ -24,7 +24,7 @@ import cn.hutool.http.HttpUtil;
 @Service
 public class BiQuGeImpl extends CommonApi implements BaseApi{
 	public static void main(String[] args) {
-		Book book = new BiQuGeImpl().getBookInfo(new BiQuGeImpl().searchByName("元尊").get(0));
+		Book book = new BiQuGeImpl().getBookInfo(new BiQuGeImpl().searchByName("万古神帝").get(0));
 		System.out.println(book);
 		//List<Chapter> list = new ArrayList<Chapter>();
 		//new BiQuGeImpl().chapterList(list, book.getSource(), 0);
@@ -40,7 +40,7 @@ public class BiQuGeImpl extends CommonApi implements BaseApi{
 	@Override
 	public List<Book> searchByName(String name) {
 		List<Book> list = new ArrayList<Book>();
-		String body = HttpRequest.post("http://www.xbiquge.la/modules/article/waps.php").form("searchkey", name).execute().body();
+		String body = HttpRequest.post("http://www.paoshuzw.com/modules/article/waps.php").form("searchkey", name).execute().body();
 		Document doc = Jsoup.parse(body);
 		Elements elements = doc.select(".grid").select("tbody").select("tr");
 		TimeZone.setDefault(TimeZone.getTimeZone("Asia/Shanghai"));
