@@ -38,6 +38,9 @@ public class App {
 	@Value("${JDBC_PASS}")
 	private String pass;
 	
+	@Value("${DATA_TYPE:sqlite}")
+	private String dataType;
+	
 	@PostConstruct
     public void started() {
       TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
@@ -60,10 +63,23 @@ public class App {
 	@Primary
 	public DruidDataSource getDataSource() {
 		DruidDataSource ds = new DruidDataSource();
-		ds.setDriverClassName("org.postgresql.Driver");
-		ds.setUrl(dbUrl);
-		ds.setUsername(user);
-		ds.setPassword(pass);
+		if(dataType.equalsIgnoreCase("postgresql")) {
+			ds.setDriverClassName("org.postgresql.Driver");
+			ds.setUrl(dbUrl);
+			ds.setUsername(user);
+			ds.setPassword(pass);
+		}else{
+			ApplicationHome h = new ApplicationHome(getClass());
+	        File jarF = h.getSource();
+	        String path = jarF.getParentFile().toString() + "/data";
+	        if(!FileUtil.exist(path)) {
+	        	FileUtil.mkdir(path);
+	        }
+			ds.setDriverClassName("org.sqlite.JDBC");
+			//ds.setUrl("jdbc:sqlite::resource:data/mbooks.db");
+			ds.setUrl("jdbc:sqlite:"+path+"/mbooks.db");
+		}
 		return ds;
+		
 	}
 }

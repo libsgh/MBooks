@@ -6,6 +6,7 @@ import java.nio.charset.Charset;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Service;
@@ -23,15 +24,39 @@ public class BootJob  implements  ApplicationListener<ContextRefreshedEvent> {
 	@Autowired
 	private DruidDataSource ds;
 	
+	@Value("${DATA_TYPE:sqlite}")
+	private String dataType;
+	
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent cre) {
 		//初始化缓存数据库
-		InputStream in = getClass().getClassLoader().getResourceAsStream("sql/mbooks_init.sql");
-		String sql = IoUtil.read(in, Charset.forName("UTF-8"));
+		String sql = "";
+		int count = 0;
+		if(dataType.equalsIgnoreCase("postgresql")) {
+			InputStream in = getClass().getClassLoader().getResourceAsStream("sql/mbooks_init_postgres.sql");
+			sql = IoUtil.read(in, Charset.forName("UTF-8"));
+			try {
+				count += Db.use(ds).execute(sql);
+			} catch (Exception e) {
+			}
+		}else {
+			InputStream in = getClass().getClassLoader().getResourceAsStream("sql/mbooks_init_sqlite_0.sql");
+			sql = IoUtil.read(in, Charset.forName("UTF-8"));
+			try {
+				count += Db.use(ds).execute(sql);
+			} catch (Exception e) {
+			}
+			in = getClass().getClassLoader().getResourceAsStream("sql/mbooks_init_sqlite_1.sql");
+			sql = IoUtil.read(in, Charset.forName("UTF-8"));
+			try {
+				count += Db.use(ds).execute(sql);
+			} catch (Exception e) {
+			}
+		}
 		try {
-			int count = Db.use(ds).execute(sql);
-			logger.info("上传任务sqlite初始化成功，影响行数：" + count);
+			
 		} catch (Exception e) {
 		}
+		logger.info("上传任务sqlite初始化成功，影响行数：" + count);
 	}
 }

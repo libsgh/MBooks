@@ -166,7 +166,7 @@ public class MainService {
 					" FROM " + 
 					"	chapter a" + 
 					"	WHERE a.\"bookId\"=?" + 
-					"	ORDER BY a.index "+order+" limit 50 offset "+startEnd[0], bid);
+					"	ORDER BY a.\"index\" "+order+" limit 50 offset "+startEnd[0], bid);
 			entity.put("chapterList", list);
 			entity.put("pages", page);
 			entity.put("order", order);
@@ -211,7 +211,7 @@ public class MainService {
 			}else {
 				entity.put("shortSummarySub", entity.getStr("shortSummary"));
 			}
-			List<Entity> list = Db.use(ds).query("select name,id from chapter where \"bookId\"=? order by index desc limit 5", bid);
+			List<Entity> list = Db.use(ds).query("select name,id from chapter where \"bookId\"=? order by \"index\" desc limit 5", bid);
 			entity.put("chapters", list);
 			entity.put("lastId", list.get(0).getStr("id"));
 			return entity;
@@ -223,7 +223,7 @@ public class MainService {
 	
 	public List<Entity> queryAllBooks() {
 		try {
-			List<Entity> list = Db.use(ds).query("select a.*,(select b.index from chapter b where b.\"bookId\"= a.id order by b.index desc LIMIT 1)as last from book a order by a.\"lastChapterUpdateTime\" desc");
+			List<Entity> list = Db.use(ds).query("select a.*,(select b.\"index\" from chapter b where b.\"bookId\"= a.id order by b.\"index\" desc LIMIT 1)as last from book a order by a.\"lastChapterUpdateTime\" desc");
 			return list.stream().map(r->{
 				r.set("timeF", formateTimestamp(r.getLong("lastChapterUpdateTime")*1000));
 				return r;
@@ -284,7 +284,7 @@ public class MainService {
 			if(i == 1) {
 				sql = "select id from chapter where \"bookId\"=? and index > ? order by index asc limit 1";
 			}else {
-				sql = "select id from chapter where \"bookId\"=? and index < ? order by index desc limit 1";
+				sql = "select id from chapter where \"bookId\"=? and index < ? order by \"index\" desc limit 1";
 			}
 			String id = Db.use(ds).queryString(sql, bId, index);
 			if(StrUtil.isBlank(id)) {
@@ -360,6 +360,16 @@ public class MainService {
 	private void updateChapter(Chapter chapter) {
 		try {
 			Db.use(ds).execute("update chapter set content=?, updateTime=? where id=?", chapter.getContent(), chapter.getUpdateTime(), chapter.getId());
+		} catch (SQLException e) {
+			logger.error(e.getMessage(), e);
+		}
+		
+	}
+	
+	public void updateStatus(String id, String status) {
+		try {
+			Entity record = Entity.create("book").set("status", status);
+			Db.use(ds).update(record, Entity.create().set("id", id));
 		} catch (SQLException e) {
 			logger.error(e.getMessage(), e);
 		}

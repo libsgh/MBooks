@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.libsgh.books.service.MainService;
 
+import cn.hutool.http.HttpUtil;
+
 @Service
 public class Jobs {
 	
@@ -21,6 +23,7 @@ public class Jobs {
 	
 	@Scheduled(cron = "0 0/5 * * * ?")
 	public void updateNewChapter() {
+		HttpUtil.get("https://novel.noki.top");
 		mainService.updateNewChapter();
 	}
 	

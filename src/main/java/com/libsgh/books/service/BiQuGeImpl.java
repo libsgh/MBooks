@@ -96,7 +96,7 @@ public class BiQuGeImpl extends CommonApi implements BaseApi{
 			index++;
 			Chapter c = new Chapter();
 			String cName = ele.select("a").text();
-			String url = "http://www.xbiquge.la" + ele.select("a").attr("href");
+			String url = "http://www.paoshuzw.com/" + ele.select("a").attr("href");
 			List<String> urls = new ArrayList<String>();
 			urls.add(url);
 			c.setName(cName);

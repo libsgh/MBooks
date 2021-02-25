@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.libsgh.books.bean.Book;
 import com.libsgh.books.jobs.Jobs;
 import com.libsgh.books.service.MainService;
 
@@ -37,6 +38,13 @@ public class MainController {
 	@ResponseBody
 	public String add(String name, Integer index) {
 		mainService.fetchOneBook(name, index);
+		return "success";
+	}
+	
+	@RequestMapping("/api/book/updateStatus")
+	@ResponseBody
+	public String updateStatus(String id, String status) {
+		mainService.updateStatus(id, status);
 		return "success";
 	}
 	
