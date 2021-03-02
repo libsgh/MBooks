@@ -110,8 +110,8 @@ public class BiQuGeImpl extends CommonApi implements BaseApi{
 	public Chapter chapterContent(Chapter chapter) {
 		String body = HttpUtil.get(chapter.getUrls().get(0));
 		Document doc = Jsoup.parse(body);
+		doc.select("#content").select("p").remove();
 		String content = doc.select("#content").html();
-		content = content.replace("<p><a href=\"http://koubei.baidu.com/s/xbiquge.la\" target=\"_blank\">亲,点击进去,给个好评呗,分数越高更新越快,据说给新笔趣阁打满分的最后都找到了漂亮的老婆哦!</a><br>手机站全新改版升级地址：http://m.xbiquge.la，数据和书签与电脑站同步，无广告清新阅读！</p>", "");
 		chapter.setContent(content);
 		return chapter;
 	}
