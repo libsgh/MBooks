@@ -57,6 +57,6 @@ public class BootJob  implements  ApplicationListener<ContextRefreshedEvent> {
 			
 		} catch (Exception e) {
 		}
-		logger.info("上传任务sqlite初始化成功，影响行数：" + count);
+		logger.info("sql初始化成功，影响行数：" + count);
 	}
 }

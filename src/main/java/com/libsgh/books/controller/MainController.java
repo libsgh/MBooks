@@ -18,6 +18,7 @@ import com.libsgh.books.service.MainService;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.db.Entity;
+import cn.hutool.log.Log;
 
 @Controller
 public class MainController {
@@ -73,6 +74,8 @@ public class MainController {
 		Entity entity = cacheService.getById(cid);
 		if(entity == null) {
 			entity = mainService.getChapterById(cid);
+		}else{
+			Log.get().info("从缓存中读取章节："+entity.getStr("name"));
 		}
 		//异步写入缓存
 		cacheService.save(entity);
