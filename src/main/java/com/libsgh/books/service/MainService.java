@@ -312,6 +312,11 @@ public class MainService {
 				}else{
 					Log.get().info(c.getName()+":"+c.getUrls().toString()+"获取正文为空");
 				}
+				try {
+					Thread.sleep(1000L);
+				} catch (InterruptedException e) {
+					logger.error(e.getMessage(), e);
+				}
 			}
 		} catch (SQLException e) {
 			logger.error(e.getMessage(), e);
