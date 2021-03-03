@@ -28,6 +28,7 @@ import cn.hutool.core.util.PageUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
+import cn.hutool.log.Log;
 
 @Service
 public class MainService {
@@ -306,7 +307,10 @@ public class MainService {
 				chapter.setUrls(urls);
 				Chapter c = biQuGeImpl.chapterContent(chapter);
 				if(StrUtil.isNotBlank(c.getContent())) {
+					Log.get().info(c.getName()+":获取成功");
 					Db.use(ds).execute("update chapter set content = ? where id=?", c.getContent(), entity.getStr("id"));
+				}else{
+					Log.get().info(c.getName()+":"+c.getUrls().toString()+"获取正文为空");
 				}
 			}
 		} catch (SQLException e) {
