@@ -307,10 +307,10 @@ public class MainService {
 				chapter.setUrls(urls);
 				Chapter c = biQuGeImpl.chapterContent(chapter);
 				if(StrUtil.isNotBlank(c.getContent())) {
-					Log.get().info(c.getName()+":获取成功");
+					Log.get().info(entity.getStr("name")+":获取成功");
 					Db.use(ds).execute("update chapter set content = ? where id=?", c.getContent(), entity.getStr("id"));
 				}else{
-					Log.get().info(c.getName()+":"+c.getUrls().toString()+"获取正文为空");
+					Log.get().info(entity.getStr("name")+":"+c.getUrls().toString()+"获取正文为空");
 				}
 				try {
 					Thread.sleep(1000L);
@@ -318,6 +318,7 @@ public class MainService {
 					logger.error(e.getMessage(), e);
 				}
 			}
+			Log.get().info("fetchContent任务执行完毕");
 		} catch (SQLException e) {
 			logger.error(e.getMessage(), e);
 		}
