@@ -191,7 +191,6 @@ public class MainService {
 					pageList.get(i).put("checked", false);
 				}
 			}
-			System.out.println(pageList);
 			entity.put("pageList", pageList);
 			return entity;
 		} catch (SQLException e) {

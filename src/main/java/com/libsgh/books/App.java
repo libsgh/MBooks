@@ -54,7 +54,7 @@ public class App {
     }
 	
 	public static void main(String[] args) {
-		DbUtil.setShowSqlGlobal(true, true, true, Level.INFO);
+		//DbUtil.setShowSqlGlobal(true, true, true, Level.INFO);
 		DbUtil.setCaseInsensitiveGlobal(false);
 		SpringApplication.run(App.class, args);
 	}
