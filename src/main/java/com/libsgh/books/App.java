@@ -68,7 +68,7 @@ public class App {
 			ds.setUrl(dbUrl);
 			ds.setUsername(user);
 			ds.setPassword(pass);
-			ds.setConnectionProperties("ssl=false");
+			ds.setConnectionProperties("sslmode=disable");
 		}else{
 			ApplicationHome h = new ApplicationHome(getClass());
 	        File jarF = h.getSource();
