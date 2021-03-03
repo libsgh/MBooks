@@ -286,10 +286,10 @@ public class MainService {
 				sql = "select id from chapter where \"bookId\"=? and index < ? order by \"index\" desc limit 1";
 			}
 			String id = Db.use(ds).queryString(sql, bId, index);
-			if(StrUtil.isBlank(id)) {
+			/**if(StrUtil.isBlank(id)) {
 				sql = "select id from chapter where \"bookId\"=? and index = ? limit 1";
 				id = Db.use(ds).queryString(sql, bId, index);
-			}
+			}**/
 			return id;
 		} catch (SQLException e) {
 			logger.error(e.getMessage(), e);

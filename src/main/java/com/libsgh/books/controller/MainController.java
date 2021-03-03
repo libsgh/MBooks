@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.libsgh.books.bean.Book;
 import com.libsgh.books.jobs.Jobs;
+import com.libsgh.books.service.CacheService;
 import com.libsgh.books.service.MainService;
 
 import cn.hutool.core.util.StrUtil;
@@ -27,6 +27,9 @@ public class MainController {
 	
 	@Autowired
 	private MainService mainService;
+	
+	@Autowired
+	private CacheService cacheService;
 	
 	@RequestMapping("/admin")
 	public String admin(Model model) {
@@ -66,7 +69,13 @@ public class MainController {
 		LiteDeviceResolver deviceResolver = new LiteDeviceResolver();
 		Device device = deviceResolver.resolveDevice(request);
 		model.addAttribute("isMobile", device.isMobile());
-		Entity entity = mainService.getChapterById(cid);
+		//从缓存中获取章节
+		Entity entity = cacheService.getById(cid);
+		if(entity == null) {
+			entity = mainService.getChapterById(cid);
+		}
+		//异步写入缓存
+		cacheService.save(entity);
 		if(entity == null || entity.isEmpty()) {
 			return "redirect:https://novel.noki.top/error/404";
 		}else{
@@ -78,15 +87,21 @@ public class MainController {
 	@RequestMapping("/c/last/{index}")
 	public String last( @PathVariable Integer index, String bId) {
 		String id = mainService.getChapterByIndex(bId, index, -1);
-		//TODO 这里要判断一下是不是有下一章或上一章了，没有跳转新页面
-		return "redirect:https://novel.noki.top/c/"+id;
+		if(StrUtil.isBlank(id)) {
+			return "redirect:https://novel.noki.top/b/detail/"+bId;
+		}else {
+			return "redirect:https://novel.noki.top/c/"+id;
+		}
 	}
 	
 	@RequestMapping("/c/next/{index}")
 	public String next(@PathVariable Integer index, String bId) {
 		String id = mainService.getChapterByIndex(bId, index, 1);
-		//TODO 这里要判断一下是不是有下一章或上一章了，没有跳转新页面
-		return "redirect:https://novel.noki.top/c/"+id;
+		if(StrUtil.isBlank(id)) {
+			return "redirect:https://novel.noki.top/b/detail/"+bId;
+		}else {
+			return "redirect:https://novel.noki.top/c/"+id;
+		}
 	}
 	
 	@RequestMapping("/b/catalog/{bid}")
