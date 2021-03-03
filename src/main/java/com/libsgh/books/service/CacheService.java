@@ -31,7 +31,15 @@ public class CacheService {
 	public void save(Entity entity) {
 		//清除当前的缓存
 		timedCache.remove(entity.getStr("id"));
-		String sql = "select * from chapter where \"bookId\"=? and index > ? order by index asc limit 5";
+		String sql = "SELECT a\n" + 
+				"	.*,\n" + 
+				"	b.name AS \"bookName\",\n" + 
+				"	b.author AS author \n" + 
+				"FROM\n" + 
+				"	chapter a\n" + 
+				"	LEFT JOIN book b ON b.id = a.\"bookId\"\n" + 
+				"WHERE\n" + 
+				"	a.\"bookId\" = ? and index > ? order by index asc limit 5";
 		try {
 			List<Entity> list = Db.use(ds).query(sql, entity.getStr("bookId"), entity.getInt("index"));
 			for (Entity e : list) {
