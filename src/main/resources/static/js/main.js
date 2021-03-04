@@ -102,13 +102,14 @@ function recordHistory(bookId, index, cname, cId){
 	info["index"] = index;
 	info["cname"] = cname;
 	info["cId"] = cId;
-	Cookies.set(bookId, JSON.stringify(info));
+	Cookies.set(bookId, JSON.stringify(info), { expires: 365 });
 }
 function startRead(bookId){
 	var data = Cookies.get(bookId);
 	if(data){
 		var d = JSON.parse(data);
 		$("#startReadBtn").text("继续阅读");
-		$("#startReadBtn").attr("onclick", "location.href='/c/next/"+d.index+"?bId="+d.bookId+"'");
+		//$("#startReadBtn").attr("onclick", "location.href='/c/next/"+d.index+"?bId="+d.bookId+"'");
+		$("#startReadBtn").attr("onclick", "location.href='/c/"+d.cId+"'");
 	}
 }

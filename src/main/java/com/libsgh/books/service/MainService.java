@@ -354,6 +354,7 @@ public class MainService {
 					}else {
 						Chapter chapter = biQuGeImpl.chapterContent(cn);
 						if(chapter.getContent().length() != c.getStr("content").length()) {
+							chapter.setId(c.getStr("id"));
 							chapter.setBookId(book.getStr("id"));
 							chapter.setUpdateTime(cn.getUpdateTime());
 							this.updateChapter(chapter);
