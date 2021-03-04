@@ -369,7 +369,7 @@ public class MainService {
 	}
 	private void updateChapter(Chapter chapter) {
 		try {
-			Db.use(ds).execute("update chapter set content=?, updateTime=? where id=?", chapter.getContent(), chapter.getUpdateTime(), chapter.getId());
+			Db.use(ds).execute("update chapter set content=?, \"updateTime\"=? where id=?", chapter.getContent(), chapter.getUpdateTime(), chapter.getId());
 		} catch (SQLException e) {
 			logger.error(e.getMessage(), e);
 		}
