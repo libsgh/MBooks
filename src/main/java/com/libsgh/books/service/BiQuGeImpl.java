@@ -10,6 +10,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.libsgh.books.bean.Book;
@@ -26,9 +28,15 @@ public class BiQuGeImpl extends CommonApi implements BaseApi{
 	
 	public static String bqugeUrl = "http://www.xbiquge.la";
 	
+	private final static Logger logger = LoggerFactory.getLogger(BiQuGeImpl.class);
+	
 	public static void main(String[] args) {
-		Book book = new BiQuGeImpl().getBookInfo(new BiQuGeImpl().searchByName("斗破苍穹").get(0));
-		System.out.println(book);
+		Book b = new Book();
+		b.setSource("http://www.xbiquge.la/7/7552/");
+		b = new BiQuGeImpl().getBookInfo(b);
+		System.out.println(b);
+	//	Book book = new BiQuGeImpl().getBookInfo(new BiQuGeImpl().searchByName("圣墟").get(2));
+	//	System.out.println(book);
 		//List<Chapter> list = new ArrayList<Chapter>();
 		//new BiQuGeImpl().chapterList(list, book.getSource(), 0);
 		//book.setChapters(list);
@@ -71,21 +79,26 @@ public class BiQuGeImpl extends CommonApi implements BaseApi{
 	@Override
 	public Book getBookInfo(Book book) {
 		String body = HttpUtil.get(book.getSource());
-		Document doc = Jsoup.parse(body);
-		String name = doc.select("#info").select("h1").text();
-		int t = Integer.parseInt((DateUtil.parse(StrUtil.subAfter(doc.select("#info").select("p").get(2).text(), "：", true)).getTime()/1000)+"");
-		String chapterName = doc.select("#info").select("p").get(3).text();
-		String cover = doc.select("#fmimg").select("img").attr("src");
-		String shortSummary = doc.select("#intro").select("p").get(1).text();
-		String categoryName = doc.select("meta[property=og:novel:category]").attr("content");
-		book.setName(name);
-		book.setLastChapterName(chapterName);
-		book.setLastChapterUpdateTime(t);
-		book.setCover(cover);
-		book.setShortSummary(shortSummary);
-		book.setCategoryName(categoryName);
-		book.setCpName("笔趣阁");
-		book.setStatus("连载");
+		try {
+			Document doc = Jsoup.parse(body);
+			String name = doc.select("#info").select("h1").text();
+			int t = Integer.parseInt((DateUtil.parse(StrUtil.subAfter(doc.select("#info").select("p").get(2).text(), "：", true)).getTime()/1000)+"");
+			String chapterName = doc.select("#info").select("p").get(3).text();
+			String cover = doc.select("#fmimg").select("img").attr("src");
+			String shortSummary = doc.select("#intro").select("p").get(1).text();
+			String categoryName = doc.select("meta[property=og:novel:category]").attr("content");
+			book.setName(name);
+			book.setLastChapterName(chapterName);
+			book.setLastChapterUpdateTime(t);
+			book.setCover(cover);
+			book.setShortSummary(shortSummary);
+			book.setCategoryName(categoryName);
+			book.setCpName("笔趣阁");
+			book.setStatus("连载");
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			logger.info(body);
+		}
 		return book;
 	}
 
