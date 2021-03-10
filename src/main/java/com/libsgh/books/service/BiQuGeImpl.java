@@ -23,8 +23,11 @@ import cn.hutool.http.HttpUtil;
 
 @Service
 public class BiQuGeImpl extends CommonApi implements BaseApi{
+	
+	public static String bqugeUrl = "http://www.xbiquge.la";
+	
 	public static void main(String[] args) {
-		Book book = new BiQuGeImpl().getBookInfo(new BiQuGeImpl().searchByName("万古神帝").get(0));
+		Book book = new BiQuGeImpl().getBookInfo(new BiQuGeImpl().searchByName("斗破苍穹").get(0));
 		System.out.println(book);
 		//List<Chapter> list = new ArrayList<Chapter>();
 		//new BiQuGeImpl().chapterList(list, book.getSource(), 0);
@@ -40,7 +43,7 @@ public class BiQuGeImpl extends CommonApi implements BaseApi{
 	@Override
 	public List<Book> searchByName(String name) {
 		List<Book> list = new ArrayList<Book>();
-		String body = HttpRequest.post("http://www.paoshuzw.com/modules/article/waps.php").form("searchkey", name).execute().body();
+		String body = HttpRequest.post(bqugeUrl+"/modules/article/waps.php").form("searchkey", name).execute().body();
 		Document doc = Jsoup.parse(body);
 		Elements elements = doc.select(".grid").select("tbody").select("tr");
 		TimeZone.setDefault(TimeZone.getTimeZone("Asia/Shanghai"));
@@ -96,7 +99,7 @@ public class BiQuGeImpl extends CommonApi implements BaseApi{
 			index++;
 			Chapter c = new Chapter();
 			String cName = ele.select("a").text();
-			String url = "http://www.paoshuzw.com" + ele.select("a").attr("href");
+			String url = bqugeUrl + ele.select("a").attr("href");
 			List<String> urls = new ArrayList<String>();
 			urls.add(url);
 			c.setName(cName);
