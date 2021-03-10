@@ -31,10 +31,16 @@ public class BiQuGeImpl extends CommonApi implements BaseApi{
 	private final static Logger logger = LoggerFactory.getLogger(BiQuGeImpl.class);
 	
 	public static void main(String[] args) {
-		Book b = new Book();
-		b.setSource("http://www.xbiquge.la/7/7552/");
-		b = new BiQuGeImpl().getBookInfo(b);
-		System.out.println(b);
+		String body = HttpUtil.get("http://www.xbiquge.la/13/13959/6244136.html");
+		Document doc = Jsoup.parse(body);
+		System.out.println(body);
+		doc.select("#content").select("p").last().remove();
+		String content = doc.select("#content").html();
+		System.out.println(content);
+		//Book b = new Book();
+		//b.setSource("http://www.xbiquge.la/7/7552/");
+		//b = new BiQuGeImpl().getBookInfo(b);
+		//System.out.println(b);
 	//	Book book = new BiQuGeImpl().getBookInfo(new BiQuGeImpl().searchByName("圣墟").get(2));
 	//	System.out.println(book);
 		//List<Chapter> list = new ArrayList<Chapter>();
@@ -126,7 +132,7 @@ public class BiQuGeImpl extends CommonApi implements BaseApi{
 	public Chapter chapterContent(Chapter chapter) {
 		String body = HttpUtil.get(chapter.getUrls().get(0));
 		Document doc = Jsoup.parse(body);
-		doc.select("#content").select("p").remove();
+		doc.select("#content").select("p").last().remove();
 		String content = doc.select("#content").html();
 		chapter.setContent(content);
 		return chapter;
