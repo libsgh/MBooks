@@ -26,7 +26,7 @@ import cn.hutool.http.HttpUtil;
 @Service
 public class BiQuGeImpl extends CommonApi implements BaseApi{
 	
-	public static String bqugeUrl = "http://www.xbiquge.la";
+	public static String bqugeUrl = "https://www.xbiquge.la";
 	
 	private final static Logger logger = LoggerFactory.getLogger(BiQuGeImpl.class);
 	
