@@ -31,7 +31,7 @@ public class BiQuGeImpl extends CommonApi implements BaseApi{
 	private final static Logger logger = LoggerFactory.getLogger(BiQuGeImpl.class);
 	
 	public static void main(String[] args) {
-		String body = HttpUtil.get("http://www.xbiquge.la/13/13959/6244136.html");
+		String body = HttpUtil.get("https://www.xbiquge.la/13/13959/6244136.html");
 		Document doc = Jsoup.parse(body);
 		System.out.println(body);
 		doc.select("#content").select("p").last().remove();
