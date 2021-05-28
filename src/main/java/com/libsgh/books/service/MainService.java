@@ -99,7 +99,8 @@ public class MainService {
 		List<Chapter> bqList = new ArrayList<Chapter>();
 		Book book = biQuGeImpl.searchByName(name).get(index);
 		book = biQuGeImpl.getBookInfo(book);
-		book.setCover(PicBed.uploadMT(book.getCover(), "./"));
+		//book.setCover(PicBed.uploadMT(book.getCover(), "./"));
+		//book.setCover(book.getCover());
 		//book = biQuGeImpl.esouBookInfo(book, index);
 		biQuGeImpl.chapterList(bqList, book.getSource(), 0);
 		book = this.addBook(book);
